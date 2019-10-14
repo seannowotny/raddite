@@ -8,17 +8,17 @@ class Post extends Model
 {
     public function creator()
     {
-        return $this->belongsTo(User::name);
+        return $this->belongsTo(User::class);
     }
 
     public function onBoard()
     {
-        return $this->belongsTo(Board::name);
+        return $this->belongsTo(Board::class);
     }
 
     public function comments()
     {
-        return $this->hasMany(Comment::name);
+        return $this->hasMany(Comment::class);
     }
 
     protected $fillable = [

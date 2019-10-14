@@ -12,7 +12,7 @@ class User extends Authenticatable
 
     function boards()
     {
-        return $this->hasMany(Board::name);
+        return $this->hasMany(Board::class);
     }
 
     function posts()

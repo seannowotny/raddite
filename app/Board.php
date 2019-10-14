@@ -8,12 +8,12 @@ class Board extends Model
 {
     public function creator()
     {
-        return $this->hasOne(User::name);
+        return $this->hasOne(User::class);
     }
 
     public function posts()
     {
-        return $this->hasMany(Post::name);
+        return $this->hasMany(Post::class);
     }
 
     protected $fillable = [
