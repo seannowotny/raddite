@@ -10,6 +10,21 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    function boards()
+    {
+        return $this->hasMany(Board::name);
+    }
+
+    function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
