@@ -4,25 +4,33 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\User as UserResource;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $data = $request->toArray();
+        $data = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
 
-        if(Auth::attempt($data))
+        if(auth()->attempt($data))
         {
-            $user = User::where('email', $data['email'])->first();
+            $user = auth()->user();
             
-            $token = $user->createToken('AccessToken')->token;
-            $token->save();
+            $token = $user->createToken('authToken')->accessToken;
+
+            return response([
+                'user' => new UserResource($user), 
+                'access_token' => $token
+            ], 201);
         }
         else
         {
-            return response(json_encode(['errors' => 'Unauthorized']), 401);
+            return response(json_encode(['errors' => 'Invalid credentials']), 401);
         }
     }
 
@@ -31,9 +39,9 @@ class AuthController extends Controller
         $data = $request->toArray();
 
         $validation = Validator::make($data, [
-            'name' => 'required|string|min:3|max:10',
-            'email' => 'required|email',
-            'password' => 'required|min:8'
+            'name' => 'required|string|min:3|max:20|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed'
         ]);
 
         if($validation->passes())
@@ -41,10 +49,15 @@ class AuthController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password' => $data['password']
+                'password' => Hash::make($data['password']) 
             ]);
 
-            return response(new UserResource($user), 201);
+            $token = $user->createToken('authToken')->accessToken;
+
+            return response([
+                'user' => new UserResource($user), 
+                'access_token' => $token
+            ], 201);
         }
         else
         {

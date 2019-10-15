@@ -14,12 +14,11 @@ class UserController extends Controller
         $this->middleware('auth:api')->except(['show']);
     }
 
-    public function current(Request $request)
+    public function current()
     {
-        $token = $request->bearerToken();
-        $user = User::where('api_token', $token)->first();
+        $user = auth()->user();
 
-        return request(new UserResource($user), 200);
+        return response(new UserResource($user), 200);
     }
 
     /**
@@ -39,18 +38,17 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         $token = $request->bearerToken();
-        $user = User::where('api_token', $token)->first();
+        $user = auth()->user();
 
         $data = $request->toArray();
 
         $validation = Validator::make($data, [
-            'name' => 'required|string|min:3|max:10',
+            'name' => 'required|string|min:3|max:20',
         ]);
 
         if($validation->passes())
@@ -68,14 +66,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy()
     {
-        $token = $request->bearerToken();
-        $user = User::where('api_token', $token)->first();
-
+        $user = auth()->user();
         $user->delete();
 
         return response(json_encode(['message' => 'Your profile was successfully deleted']), 200);
