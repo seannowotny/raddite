@@ -21,8 +21,9 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$0WYN.TWI67yPHeTs5ocAM.VsPwdVQ.BFpFAAWJ2IGIkVFlyswli8K', // password
+        'password' => '$2y$10$0WYN.TWI67yPHeTs5ocAM.VsPwdVQ.BFpFAAWJ2IGIkVFlyswli8K',
         'remember_token' => Str::random(10),
+        'api_token' => Str::random(80),
     ];
 });
 
@@ -30,8 +31,5 @@ $factory->state(User::class, 'jd', function (Faker $faker) {
     return [
         'name' => 'John Doe',
         'email' => 'jdoe@gmail.com',
-        'email_verified_at' => now(),
-        'password' => '$2y$10$0WYN.TWI67yPHeTs5ocAM.VsPwdVQ.BFpFAAWJ2IGIkVFlyswli8K', // password
-        'remember_token' => Str::random(10),
     ];
 });
