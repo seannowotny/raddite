@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {   
-    public function creator()
+    public function author()
     {
         $this->belongsTo(User::class);
     }
