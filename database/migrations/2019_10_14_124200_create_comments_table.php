@@ -20,11 +20,11 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('author_id')->unique();
             $table->foreign('author_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('on_post_id')->unique();
-            $table->foreign('on_post_id')->references('id')->on('posts');
+            $table->unsignedBigInteger('post_id')->unique();
+            $table->foreign('post_id')->references('id')->on('posts');
 
-            $table->unsignedBigInteger('replying_to_id')->unique()->nullable();
-            $table->foreign('replying_to_id')->references('id')->on('comments')->nullable();
+            $table->unsignedBigInteger('comment_id')->unique()->nullable();
+            $table->foreign('comment_id')->references('id')->on('comments')->nullable();
 
             $table->timestamps();
         });

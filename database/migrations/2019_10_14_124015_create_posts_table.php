@@ -18,11 +18,11 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('body');
 
-            $table->unsignedBigInteger('author_id')->unique();
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('on_board_id')->unique();
-            $table->foreign('on_board_id')->references('id')->on('boards'); 
+            $table->unsignedBigInteger('board_id')->unique();
+            $table->foreign('board_id')->references('id')->on('boards'); 
 
             $table->timestamps();
         });

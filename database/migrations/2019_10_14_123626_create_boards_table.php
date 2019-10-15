@@ -17,8 +17,8 @@ class CreateBoardsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
 
-            $table->unsignedBigInteger('creator_id')->unique();
-            $table->foreign('creator_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users');
             
             $table->timestamps();
         });
