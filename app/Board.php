@@ -8,7 +8,7 @@ class Board extends Model
 {
     public function creator()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function posts()
