@@ -14,7 +14,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        $postsCount = (int)$this->command->ask('How many posts would you like per user? (Default 4)', 4);
+        $postsCount = (int)$this->command->ask('How many posts would you like each user to make? (Default 4)', 4);
 
         $users = User::all();
 

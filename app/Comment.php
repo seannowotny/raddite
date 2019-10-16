@@ -8,22 +8,22 @@ class Comment extends Model
 {   
     public function author()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function onPost()
     {
-        $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class);
     }
 
     public function replyingTo()
     {
-        $this->belongsTo(Comment::class);
+        return $this->belongsTo(Comment::class);
     }
 
     public function comments()
     {
-        $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class);
     }
 
     protected $fillable = [
