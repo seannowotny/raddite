@@ -70,14 +70,20 @@ class PostController extends Controller
         ]);
 
         $user = auth()->user();
-        $post = $user->posts()->find($id);
+        
+        if($post = $user->posts()->find($id))
+        {
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->updated_at = Carbon::now();
 
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->updated_at = Carbon::now();
+            $post->save();
 
-        $post->save();
-
-        return response(new PostResource($post), 200);
+            return response(new PostResource($post), 200);
+        }
+        else
+        {
+            return response(json_encode(['error' => 'This post isn\'t yours']), 401);
+        }
     }
 }

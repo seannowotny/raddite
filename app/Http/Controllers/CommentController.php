@@ -69,8 +69,9 @@ class CommentController extends Controller
             'content' => 'required|min:3',
         ]);
 
-        $comment = Comment::find($id);
-        if(auth()->user()->id === $comment->user->id)
+        $user = auth()->user();
+        
+        if($comment = $user->comments->find($id))
         {
             $comment->content = $request->content;
             $comment->updated_at = Carbon::now();
