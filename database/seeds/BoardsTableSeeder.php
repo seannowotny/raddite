@@ -21,9 +21,7 @@ class BoardsTableSeeder extends Seeder
             if($boardsCount > 0 
             && rand(0, 1) === 1)
             {
-                $user->boards()->saveMany(factory(Board::class, 1, [
-                    'user_id' => $user->id,
-                ])->make());
+                $user->boards()->save(factory(Board::class)->make());
 
                 $boardsCount--;
             }
