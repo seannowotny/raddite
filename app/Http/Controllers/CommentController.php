@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Http\Resources\Comment as CommentResource;
+use Carbon\Carbon;
 
 class CommentController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth:api')->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'postId' => 'required|integer|exists:posts,id',
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $comments = Post::find($request->postId)->comments;
+
+        return response(CommentResource::collection($comments), 200);
     }
 
     /**
@@ -35,29 +39,21 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'postId' => 'required|integer|exists:posts,id',
+            'commentId' => 'integer|exists:comments,id|nullable',
+            'content' => 'required|min:3',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
+        $user = auth()->user();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        $post = Post::find($request->postId);
+        $comment = $user->comments()->save(factory(Comment::class)->make([
+            'content' => $request->content,
+            'post_id' => $post->id,
+        ]));
+
+        return response(new CommentResource($comment), 200);
     }
 
     /**
@@ -67,19 +63,24 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, int $id)
     {
-        //
-    }
+        $request->validate([
+            'content' => 'required|min:3',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comment $comment)
-    {
-        //
+        $comment = Comment::find($id);
+        if(auth()->user()->id === $comment->user->id)
+        {
+            $comment->content = $request->content;
+            $comment->updated_at = Carbon::now();
+            $comment->save();
+
+            return response(new CommentResource($comment), 200);
+        }
+        else
+        {
+            return response(json_encode(['error' => 'This comment isn\'t yours']), 401);
+        }    
     }
 }
