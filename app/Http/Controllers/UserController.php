@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['show']);
+        $this->middleware('auth')->except(['show']);
     }
 
     public function current()
@@ -27,9 +27,9 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(int $id)
     {
-        $user = User::find($user)->first();
+        $user = User::find($id)->first();
 
         return response(new UserResource($user), 200);
     }
@@ -42,25 +42,15 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $token = $request->bearerToken();
         $user = auth()->user();
 
-        $data = $request->toArray();
-
-        $validation = Validator::make($data, [
+        $request->validate([
             'name' => 'required|string|min:3|max:20',
         ]);
 
-        if($validation->passes())
-        {
-            $user->name = $data['name'];
-            $user->save();
-            return response(new UserResource($user), 200);
-        }
-        else
-        {
-            return response($validation->errors()->all(), 400);
-        }
+        $user->name = $request->name;
+        $user->save();
+        return response(new UserResource($user), 200);
     }
 
     /**
