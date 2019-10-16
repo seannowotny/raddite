@@ -19,4 +19,4 @@ Route::post('auth', 'AuthController@register');
 Route::apiResource('users', 'UserController')->only(['show']);
 Route::get('user', 'UserController@current');
 Route::put('user', 'UserController@update');
-Route::post('user', 'UserController@destroy');
+Route::delete('user', 'UserController@delete');

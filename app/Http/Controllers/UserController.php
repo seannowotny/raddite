@@ -68,7 +68,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function delete()
     {
         $user = auth()->user();
         $user->delete();
