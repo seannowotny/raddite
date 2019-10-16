@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Board extends Model
 {
-    public function creator()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

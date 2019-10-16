@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function onBoard()
+    public function board()
     {
         return $this->belongsTo(Board::class);
     }

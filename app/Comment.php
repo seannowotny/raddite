@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {   
-    public function author()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function onPost()
+    public function post()
     {
         return $this->belongsTo(Post::class);
     }
 
-    public function replyingTo()
+    public function comment()
     {
         return $this->belongsTo(Comment::class);
     }

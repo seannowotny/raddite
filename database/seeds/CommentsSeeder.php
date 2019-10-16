@@ -34,7 +34,7 @@ class CommentsSeeder extends Seeder
                     $comment = Comment::all()->random();
                     $comment = $comment->comments()->save(factory(Comment::class)->make([
                         'user_id' => $user,
-                        // 'post_id' => $comment->post,
+                        'post_id' => $comment->post,
                     ]));
                 }
             }
