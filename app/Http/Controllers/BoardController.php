@@ -34,7 +34,7 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|min:3|max:20|unique:boards',
+            'name' => 'required|min:3|max:20|unique:boards',
         ]);
 
         $user = auth()->user();
