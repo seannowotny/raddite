@@ -20,3 +20,5 @@ Route::apiResource('users', 'UserController')->only(['show']);
 Route::get('user', 'UserController@current');
 Route::put('user', 'UserController@update');
 Route::delete('user', 'UserController@delete');
+
+Route::apiResource('boards', 'BoardController')->only(['index', 'store']);

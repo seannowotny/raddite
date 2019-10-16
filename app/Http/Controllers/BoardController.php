@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Board;
 use Illuminate\Http\Request;
+use App\Http\Resources\Board as BoardResource;
 
 class BoardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +20,9 @@ class BoardController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $boards = Board::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response(BoardResource::collection($boards), 200);
     }
 
     /**
@@ -35,51 +33,16 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|string|min:3|max:20|unique:boards',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Board  $board
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Board $board)
-    {
-        //
-    }
+        $user = auth()->user();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Board  $board
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Board $board)
-    {
-        //
-    }
+        $user->boards()->save(factory(Board::class)->make([
+            'name' => $request->name,
+        ]));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Board  $board
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Board $board)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Board  $board
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Board $board)
-    {
-        //
+        return response(['message' => 'Board saved'], 201);
     }
 }
