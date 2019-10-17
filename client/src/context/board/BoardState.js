@@ -3,6 +3,7 @@ import React, { useReducer } from 'react';
 import BoardRequests from './BoardRequests';
 import boardReducer from './boardReducer';
 import BoardContext from './boardContext';
+import Board from './Board';
 
 const BoardState = (props: any) =>
 {
@@ -13,10 +14,20 @@ const BoardState = (props: any) =>
 
    const[state, dispatch] = useReducer(boardReducer, initialState);
 
-   const boardRequest = new BoardRequests(dispatch);
+   const boardRequests = new BoardRequests(dispatch);
 
-   const getBoards = boardRequest.GetBoards;
-   const addBoard = boardRequest.AddBoard;
+   const getBoards = boardRequests.GetBoards;
+   const addBoard = boardRequests.AddBoard;
+
+   const setCurrentBoard = async (boardName: string) =>
+   {
+      const board = state.boards.filter(board => board.name === boardName);
+
+      if(board)
+      {
+         dispatch({ currentBoard: board });
+      }
+   }
 
    return (
       <BoardContext.Provider
@@ -24,7 +35,8 @@ const BoardState = (props: any) =>
             errors: state.errors,
             boards: state.boards,
             getBoards,
-            addBoard
+            addBoard,
+            setCurrentBoard
           }}>
           { props.children }
       </BoardContext.Provider>
