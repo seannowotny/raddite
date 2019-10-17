@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Boards from '../boards/Boards';
 
 function Navbar()
 {
@@ -10,16 +11,7 @@ function Navbar()
       <div className="navbar-brand">Boards</div>
       <input id="something" list="somethingelse" />
       <datalist id="somethingelse">
-         <option value="Something"></option>
-         <option value="Something Else"></option>
-         <option value="Another One"></option>
-         <option value="Alpha"></option>
-         <option value="Bravo"></option>
-         <option value="Charlie"></option>
-         <option value="Delta"></option>
-         <option value="Echo"></option>
-         <option value="Foxtrot"></option>
-         <option value="Gamma"></option>
+         <Boards/>
       </datalist>
       <div className="navbar-brand ml-2 container">Welcome To The Wonderfully Marvelous Halls Of Raddite</div>
          <div className="collapse navbar-collapse" id="navbarSupportedContent">
