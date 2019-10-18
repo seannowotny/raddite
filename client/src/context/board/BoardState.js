@@ -1,5 +1,6 @@
 // @flow
-import React, { useReducer } from 'react';
+import React, { useReducer, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import BoardRequests from '../../requests/BoardRequests';
 import PostRequests from '../../requests/PostRequests';
 import reducer from '../reducer';
@@ -8,9 +9,10 @@ import BoardContext from './boardContext';
 const BoardState = (props: any) =>
 {
    const initialState = {
-      boards: [],
       errors: [],
-      selectedBoardId: null
+      boards: [],
+      selectedBoardId: null,
+      redirect: null
    };
 
    const[state, dispatch] = useReducer(reducer, initialState);
@@ -24,22 +26,31 @@ const BoardState = (props: any) =>
       dispatch({ boards });
    }
 
-   const setCurrentBoard = async (boardName: string) =>
+   const setCurrentBoard = async (boardName_: string) =>
    {
-      const board = state.boards.filter(board => board.name === boardName);
+      const boardName = boardName_.toLowerCase();
+      const board = state.boards.filter(board => board.name.toLowerCase() === boardName);
 
       if(board.length > 0)
       {
-         const board = state.boards.filter(board => board.name === boardName)[0];
+         const board = state.boards.filter(board => board.name.toLowerCase() === boardName)[0];
          const boardId = board.id;
 
-         dispatch({ selectedBoardId: boardId });
+         dispatch(
+         { 
+            selectedBoardId: boardId,
+            redirect: '/' + board.name
+         });
 
          !board.posts && await fillPosts(boardId);
       }
-      else
+      else if(boardName === '')
       {
-         dispatch({ selectedBoardId: null });
+         dispatch(
+         { 
+            selectedBoardId: null,
+            redirect: '/'
+         });
       }
    }
 
@@ -52,15 +63,19 @@ const BoardState = (props: any) =>
    }
 
    return (
-      <BoardContext.Provider
-         value={{ 
-            errors: state.errors,
-            boards: state.boards,
-            fillBoards,
-            setCurrentBoard
-          }}>
-          { props.children }
-      </BoardContext.Provider>
+      <Fragment>
+         <BoardContext.Provider
+            value={{ 
+               errors: state.errors,
+               boards: state.boards,
+               selectedBoardId: state.selectedBoardId,
+               fillBoards,
+               setCurrentBoard
+            }}>
+            { props.children }
+         </BoardContext.Provider> 
+         {state.redirect && <Redirect to={state.redirect}/>}
+      </Fragment>
    )
 }
 

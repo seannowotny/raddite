@@ -19,30 +19,26 @@ import Navbar from './components/layout/Navbar';
 
 function App() {
   return (
+  <Router>
     <BoardState>
-      <Router>
-        <Fragment>
-        <Navbar />
-          <div className="container">
-            <Switch>
+    <Navbar />
+      <div className="container">
+        <Switch>
+          <Route exact path='/' component={Home} />
 
-              <Route exact path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
 
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/register' component={Register} />
+          <Route exact path='/profile/:userName' component={Profile} />
 
-              <Route exact path='/profile/:userName' component={Profile} />
-
-              <Route exact path='/:boardName' component={Board}/>
-              <Route exact path='/:boardName/create' component={PostCreate} />
-              <Route exact path='/:boardName/:postName' component={Post}/>
-              <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
-
-            </Switch>
-          </div>
-        </Fragment>
-      </Router>
+          <Route exact path='/:boardName' component={Board}/>
+          <Route exact path='/:boardName/create' component={PostCreate} />
+          <Route exact path='/:boardName/:postName' component={Post}/>
+          <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
+        </Switch>
+      </div>
     </BoardState>
+  </Router>
   );
 }
 
