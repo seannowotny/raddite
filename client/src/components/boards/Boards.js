@@ -6,12 +6,12 @@ const Boards = () =>
 {
    const boardContext = useContext(BoardContext);
 
-   const { boards, getBoards, setCurrentBoard } = boardContext;
+   const { boards, fillBoards, setCurrentBoard } = boardContext;
 
    useEffect(() => {
       if(boards.length === 0)
       {
-         getBoards();
+         fillBoards();
       }
    }, []);
 

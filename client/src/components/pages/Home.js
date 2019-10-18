@@ -1,13 +1,22 @@
 // @flow
 
-import React from 'react';
+import React, { useContext, useEffect, Fragment, useState } from 'react';
+import BoardContext from '../../context/board/boardContext';
 
-export default class Home extends React.Component
+const Home = (props: any) =>
 {
-   render()
-   {
-      return (
-         <h1>Home</h1>
-      );
-   }
+   // const { fetchPosts } = useContext(selectedBoardContext); // OVER HERE
+
+   // useEffect(() => {
+   //    if(boards.length === 0)
+   //    {
+   //       fetchPosts();
+   //    }
+   // }, []);
+
+   return (
+      <h1>Home</h1>
+   );
 }
+
+export default Home;
