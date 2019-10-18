@@ -33,8 +33,12 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
+        $noLogin = '/(?i)(?!^login$)(^.*$)/';
+        $noRegister = '/(?i)(?!^register$)(^.*$)/';
+        $noProfile = '/(?i)(?!^profile$)(^.*$)/';
+
         $request->validate([
-            'name' => 'required|min:3|max:20|unique:boards',
+            'name' => "required|min:3|max:20|unique:boards|regex:{$noLogin}|regex:{$noRegister}|regex:{$noProfile}",
         ]);
 
         $user = auth()->user();

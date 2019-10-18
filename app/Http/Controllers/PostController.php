@@ -41,7 +41,7 @@ class PostController extends Controller
     {
         $request->validate([
             'boardId' => 'required|integer|exists:boards,id',
-            'title' => 'required',
+            'title' => 'required|regex:/(?i)(?!^edit$)(^.*$)/',
             'body' => 'required',
         ]);
 
