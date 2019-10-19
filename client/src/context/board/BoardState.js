@@ -12,7 +12,8 @@ const BoardState = (props: any) =>
       errors: [],
       boards: [],
       selectedBoardId: null,
-      redirect: null
+      redirect: null,
+      domain: ''
    };
 
    const[state, dispatch] = useReducer(reducer, initialState);
@@ -28,6 +29,7 @@ const BoardState = (props: any) =>
 
    const setCurrentBoard = async (boardName_: string) =>
    {
+      console.log(boardName_);
       const boardName = boardName_.toLowerCase();
       const board = state.boards.filter(board => board.name.toLowerCase() === boardName);
 
@@ -39,7 +41,8 @@ const BoardState = (props: any) =>
          dispatch(
          { 
             selectedBoardId: boardId,
-            redirect: '/' + board.name
+            redirect: '/' + board.name,
+            domain: 'BOARD'
          });
 
          !board.posts && await fillPosts(boardId);
@@ -47,11 +50,15 @@ const BoardState = (props: any) =>
       else if(boardName === '')
       {
          console.log('dispatching /');
-         dispatch(
+         await dispatch(
          { 
             selectedBoardId: null,
-            redirect: '/'
+            redirect: '/',
+            domain: 'HOME'
          });
+         console.log('dispatched /');
+         console.log('state.selectedBoardId: ' + state.selectedBoardId);
+         console.log('state.redirect: ' + state.redirect);
       }
    }
 
@@ -70,6 +77,7 @@ const BoardState = (props: any) =>
                errors: state.errors,
                boards: state.boards,
                selectedBoardId: state.selectedBoardId,
+               domain: state.domain, 
                fillBoards,
                setCurrentBoard
             }}>
