@@ -12,7 +12,7 @@ const BoardRouter = (props: any) =>
 
    const { setCurrentBoard, selectedBoardId, boards } = useContext(BoardContext);
 
-   const [result, setResult] = useState(<Fragment><h1>Loading...</h1></Fragment>);
+   const [result, setResult] = useState(<Fragment><h1>Loading Board...</h1></Fragment>);
 
    useEffect(() => 
    {
@@ -23,7 +23,7 @@ const BoardRouter = (props: any) =>
       else if(selectedBoardId)
       {
          setResult(
-            <Board boardName={boardName}/>
+            <Board />
          );
       }
    }, [boards, selectedBoardId]);

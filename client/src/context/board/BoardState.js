@@ -46,6 +46,7 @@ const BoardState = (props: any) =>
       }
       else if(boardName === '')
       {
+         console.log('dispatching /');
          dispatch(
          { 
             selectedBoardId: null,
