@@ -1,22 +1,22 @@
 // @flow
 
 import React, { useContext, useEffect, Fragment, useState } from 'react';
+import Router, { useParams, Redirect } from 'react-router-dom';
 import BoardContext from '../../context/board/boardContext';
 
-const Home = (props: any) =>
+const Board = (props: any) =>
 {
-   // const { fetchPosts } = useContext(selectedBoardContext); // OVER HERE
+   const { boards, selectedBoardId, setCurrentBoard, redirect } = useContext(BoardContext);
 
-   // useEffect(() => {
-   //    if(boards.length === 0)
-   //    {
-   //       fetchPosts();
-   //    }
-   // }, []);
+   const boardId = props.boardId;
 
    return (
-      <h1>Board</h1>
+      <Fragment>
+         <h1>Board</h1>
+         <h1>{selectedBoardId}</h1>
+         <h1>{props.boardName}</h1>
+      </Fragment>
    );
 }
 
-export default Home;
+export default Board;

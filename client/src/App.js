@@ -2,9 +2,8 @@
 
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import BoardRouter from './routers/BoardRouter';
 import Home from './components/pages/Home';
-import Board from './components/pages/Board';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
@@ -31,7 +30,7 @@ function App() {
 
           <Route exact path='/profile/:userName' component={Profile} />
 
-          <Route exact path='/:boardName' component={Board}/>
+          <Route exact path='/:boardName' component={BoardRouter}/>
           <Route exact path='/:boardName/create' component={PostCreate} />
           <Route exact path='/:boardName/:postName' component={Post}/>
           <Route exact path='/:boardName/:postName/edit' component={PostEdit} />

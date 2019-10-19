@@ -73,7 +73,7 @@ const BoardState = (props: any) =>
                setCurrentBoard
             }}>
             { props.children }
-         </BoardContext.Provider> 
+         </BoardContext.Provider>
          {state.redirect && <Redirect to={state.redirect}/>}
       </Fragment>
    )
