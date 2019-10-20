@@ -20,23 +20,14 @@ const BoardRouter = (props: any) =>
       {
          setCurrentBoard(boardName);
       }
-      else if(selectedBoardId)
-      {
-         setResult(
-            <Board />
-         );
-      }
-   }, [boards, selectedBoardId]);
 
-   useEffect(() =>
-   {
       if(selectedBoardId)
       {
          setResult(
             <Board />
          );
       }
-   }, [selectedBoardId]);
+   }, [boards, selectedBoardId]);
 
    return result;
 }
