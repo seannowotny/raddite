@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, Fragment, useState } from 'react';
 import Router, { useParams, Redirect } from 'react-router-dom';
-import Post from './Post';
+import Post from '../Post';
 import BoardContext from '../../context/board/boardContext';
 
 const Board = (props: any) =>

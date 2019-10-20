@@ -4,7 +4,7 @@ import BoardContext from '../../context/board/boardContext';
 
 const BoardsListing = () => 
 {
-   const { boards, setCurrentBoard } = useContext(BoardContext);
+   const { boards, setSelectedBoard } = useContext(BoardContext);
 
    const [boardInput, setBoardInput] = useState('');
 
@@ -13,7 +13,7 @@ const BoardsListing = () =>
       const value = event.target.value;
       setBoardInput(value);
 
-      setCurrentBoard(value);
+      setSelectedBoard(value);
    }
 
    return (
