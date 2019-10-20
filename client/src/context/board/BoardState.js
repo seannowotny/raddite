@@ -1,5 +1,5 @@
 // @flow
-import React, { useReducer, Fragment } from 'react';
+import React, { useReducer, Fragment, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import BoardRequests from '../../requests/BoardRequests';
 import PostRequests from '../../requests/PostRequests';
@@ -9,11 +9,10 @@ import BoardContext from './boardContext';
 const BoardState = (props: any) =>
 {
    const initialState = {
-      errors: [],
-      boards: [],
-      selectedBoardId: null,
-      redirect: null,
-      domain: ''
+      errors: null,
+      boards: null,
+      selectedBoard: null,
+      redirect: null
    };
 
    const[state, dispatch] = useReducer(reducer, initialState);
@@ -21,44 +20,33 @@ const BoardState = (props: any) =>
    const boardRequests = new BoardRequests(dispatch);
    const postRequests = new PostRequests(dispatch);
 
-   const fillBoards = async () =>
+   const setCurrentBoard = async (boardName: string) =>
    {
-      const boards = await boardRequests.FetchBoards();
-      dispatch({ boards });
-   }
+      console.log(boardName);
+      console.log(state.boards);
+      let selectedBoard = state.boards.filter(
+         board => board.name.toLowerCase() === boardName.toLowerCase()
+      );
 
-   const setCurrentBoard = async (boardName_: string) =>
-   {
-      console.log(boardName_);
-      const boardName = boardName_.toLowerCase();
-      const board = state.boards.filter(board => board.name.toLowerCase() === boardName);
-
-      if(board.length > 0)
+      if(selectedBoard.length > 0)
       {
-         const board = state.boards.filter(board => board.name.toLowerCase() === boardName)[0];
-         const boardId = board.id;
+         selectedBoard = selectedBoard[0];
 
          dispatch(
          { 
-            selectedBoardId: boardId,
-            redirect: '/' + board.name,
-            domain: 'BOARD'
+            selectedBoard,
+            redirect: '/' + selectedBoard.name
          });
 
-         !board.posts && await fillPosts(boardId);
+         !selectedBoard.posts && fillPosts(selectedBoard.id);
       }
-      else if(boardName === '')
+      else
       {
-         console.log('dispatching /');
-         await dispatch(
+         dispatch(
          { 
-            selectedBoardId: null,
-            redirect: '/',
-            domain: 'HOME'
+            selectedBoard: null,
+            redirect: '/'
          });
-         console.log('dispatched /');
-         console.log('state.selectedBoardId: ' + state.selectedBoardId);
-         console.log('state.redirect: ' + state.redirect);
       }
    }
 
@@ -70,15 +58,26 @@ const BoardState = (props: any) =>
       dispatch({ boards: boards });
    }
 
+   const fillBoards = async () =>
+   {
+      const boards = await boardRequests.FetchBoards();
+      dispatch({ boards });
+   }
+
+   useEffect(() => {
+      if(! state.boards)
+      {
+         fillBoards();
+      }
+   }, []);
+
    return (
       <Fragment>
          <BoardContext.Provider
             value={{ 
                errors: state.errors,
                boards: state.boards,
-               selectedBoardId: state.selectedBoardId,
-               domain: state.domain, 
-               fillBoards,
+               selectedBoard: state.selectedBoard,
                setCurrentBoard
             }}>
             { props.children }

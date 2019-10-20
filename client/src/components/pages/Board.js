@@ -7,9 +7,13 @@ import BoardContext from '../../context/board/boardContext';
 
 const Board = (props: any) =>
 {
-   const { boards, selectedBoardId } = useContext(BoardContext);
+   const { boards, selectedBoard } = useContext(BoardContext);
 
-   const board = boards.filter(board => board.id === selectedBoardId)[0];
+   let board = null
+   if(selectedBoard && boards)
+   {
+      board = boards.filter(board => board.id === selectedBoard.id)[0];
+   }
 
    return (
       <Fragment>

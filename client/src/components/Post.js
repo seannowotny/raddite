@@ -1,13 +1,13 @@
 // @flow
 
 import React, { useContext, useEffect, Fragment, useState } from 'react';
-import BoardContext from '../../context/board/boardContext';
+import BoardContext from '../context/board/boardContext';
 
 function Post(props: any)
 {
    const { boards, selectedBoard } = useContext(BoardContext);
 
-   const board = boards.filter(board => board.id === selectedBoard.id)[0];
+   const board = boards.filter(board => board.id === selectedBoard)[0];
 
    const post = board.posts.filter(post => post.id === props.id)[0];
 

@@ -30,7 +30,9 @@ function App() {
 
           <Route exact path='/profile/:userName' component={Profile} />
 
-          <Route exact path='/:boardName' component={BoardRouter}/>
+          <Route exact path='/:boardName'>
+            <BoardRouter />
+          </Route>
           <Route exact path='/:boardName/create' component={PostCreate} />
           <Route exact path='/:boardName/:postName' component={Post}/>
           <Route exact path='/:boardName/:postName/edit' component={PostEdit} />

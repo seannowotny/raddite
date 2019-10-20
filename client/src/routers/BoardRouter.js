@@ -10,26 +10,17 @@ const BoardRouter = (props: any) =>
 {
    const { boardName } = useParams();
 
-   const { setCurrentBoard, selectedBoardId, boards, domain } = useContext(BoardContext);
-
-   const [result, setResult] = useState(<Fragment><h1>Loading Board...</h1></Fragment>);
+   const { setCurrentBoard, boards } = useContext(BoardContext);
 
    useEffect(() => 
    {
-      if(domain !== 'HOME' && ! selectedBoardId && boards.length > 0)
+      if(boards)
       {
          setCurrentBoard(boardName);
       }
+   }, [boards]);
 
-      if(selectedBoardId)
-      {
-         setResult(
-            <Board />
-         );
-      }
-   }, [boards, selectedBoardId]);
-
-   return result;
+   return <Board />;
 }
 
 export default BoardRouter;

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Boards from '../boards/Boards';
+import BoardsListing from '../boards/BoardsListing';
 
 function Navbar()
 {
    return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="navbar-brand">Boards</div>
-      <Boards/>
+      <div className="navbar-brand">BoardsListing</div>
+      <BoardsListing/>
       <div className="navbar-brand ml-2 container">Welcome To The Wonderfully Marvelous Halls Of Raddite</div>
          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">

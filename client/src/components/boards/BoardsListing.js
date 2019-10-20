@@ -2,22 +2,13 @@
 import React, { useContext, useEffect, Fragment, useState } from 'react';
 import BoardContext from '../../context/board/boardContext';
 
-const Boards = () => 
+const BoardsListing = () => 
 {
-   const boardContext = useContext(BoardContext);
-
-   const { boards, fillBoards, setCurrentBoard } = boardContext;
-
-   useEffect(() => {
-      if(boards.length === 0)
-      {
-         fillBoards();
-      }
-   }, []);
+   const { boards, setCurrentBoard } = useContext(BoardContext);
 
    const [boardInput, setBoardInput] = useState('');
 
-   const handleChange = (event: any) =>
+   const handleInputChange = (event: any) =>
    {
       const value = event.target.value;
       setBoardInput(value);
@@ -27,9 +18,9 @@ const Boards = () =>
 
    return (
       <Fragment>
-         <input value={boardInput} type="text" id="boardInput" list="boardDatalist" onChange={handleChange}/>
+         <input value={boardInput} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
          <datalist id="boardDatalist">
-            {boards.length > 0 ? 
+            {boards ? 
             boards.map(board => (
                   <option key={board.id} value={board.name}></option>)
             ):<Fragment/>}
@@ -38,4 +29,4 @@ const Boards = () =>
    );
 }
 
-export default Boards;
+export default BoardsListing;
