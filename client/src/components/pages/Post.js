@@ -1,19 +1,19 @@
 // @flow
 
 import React, { useContext, useEffect, Fragment, useState } from 'react';
-import PostContext from '../../context/post/postContext';
+import BoardContext from '../../context/board/boardContext';
 
-function Post(props: any)
+function Board(props: any)
 {
-   const { selectedPost } = useContext(PostContext);
+   const { selectedBoard } = useContext(BoardContext);
 
    return (
       <Fragment>
-         <h1>Post</h1>
-         <h1>{selectedPost.title}</h1>
-         <p>{selectedPost.body}</p>
+         <h1>Board</h1>
+         <h1>{selectedBoard.selectedPost.title}</h1>
+         <p>{selectedBoard.selectedPost.body}</p>
       </Fragment>
    );
 }
 
-export default Post;
+export default Board;

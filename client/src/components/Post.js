@@ -3,13 +3,11 @@
 import React, { useContext, useEffect, Fragment, useState, Button } from 'react';
 import Router, { Link } from 'react-router-dom';
 import BoardContext from '../context/board/boardContext';
-import PostContext from '../context/post/postContext';
 import RedirectContext from '../context/redirect/redirectContext';
 
 function Post(props: any)
 {
-   const { boards, selectedBoard } = useContext(BoardContext);
-   const { setSelectedPost } = useContext(PostContext);
+   const { boards, selectedBoard, SetSelectedPost } = useContext(BoardContext);
 
    const board = boards.filter(board => board.id === selectedBoard.id)[0];
 
@@ -18,7 +16,7 @@ function Post(props: any)
    const redirect = () =>
    {
       console.log(post.title + " POST.TITLE");
-      setSelectedPost(post.title);
+      SetSelectedPost(post.title, selectedBoard);
    }
 
    return (

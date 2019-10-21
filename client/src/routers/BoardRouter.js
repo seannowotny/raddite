@@ -10,13 +10,14 @@ const BoardRouter = (props: any) =>
 {
    const { boardName } = useParams();
 
-   const { setSelectedBoard, boards } = useContext(BoardContext);
+   const boardContext = useContext(BoardContext);
+   const { SetSelectedBoard, boards } = boardContext;
 
    useEffect(() => 
    {
       if(boards)
       {
-         setSelectedBoard(boardName);
+         SetSelectedBoard(boardName, boardContext);
       }
    }, [boards]);
 

@@ -15,7 +15,6 @@ import PostEdit from './components/pages/PostEdit';
 
 import RedirectState from './context/redirect/RedirectState';
 import BoardState from './context/board/BoardState';
-import PostState from './context/post/PostState';
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
@@ -25,38 +24,36 @@ function App() {
   <Router>
     <RedirectState>
       <BoardState>
-        <PostState>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <Route exact path='/' component={Home} />
+        <Navbar />
+        <div className="container">
+          <Switch>
+            <Route exact path='/' component={Home} />
 
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
 
-              <Route exact path='/profile/:userName' component={Profile} />
+            <Route exact path='/profile/:userName' component={Profile} />
 
-              <Route exact path='/:boardName'>
-                <BoardRouter>
-                  <Switch>
+            <Route exact path='/:boardName'>
+              <BoardRouter>
+                <Switch>
 
-                    <Route exact path='/:boardName/:postName'>
-                      <PostRouter>
-                        <Post/>
-                      </PostRouter>
-                    </Route>
-                    
-                    <Board />
+                  <Route exact path='/:boardName/:postName'>
+                    <PostRouter>
+                      <Post/>
+                    </PostRouter>
+                  </Route>
+                  
+                  <Board />
 
-                  </Switch>
-                </BoardRouter>
-              </Route>
-              <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
-              <Route exact path='/:boardName/create' component={PostCreate} />
-              
-            </Switch>
-          </div>
-        </PostState>
+                </Switch>
+              </BoardRouter>
+            </Route>
+            <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
+            <Route exact path='/:boardName/create' component={PostCreate} />
+            
+          </Switch>
+        </div>
       </BoardState>
     </RedirectState>
   </Router>
