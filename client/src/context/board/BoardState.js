@@ -23,32 +23,26 @@ const BoardState = (props: any) =>
 
    const setSelectedBoard = async (boardName: string) =>
    {
-      let selectedBoard = state.boards.filter(
+      let selectedBoard = state.boards.find(
          board => board.name.toLowerCase() === boardName.toLowerCase()
       );
 
-      if(selectedBoard.length > 0)
+      if(selectedBoard)
       {
-         selectedBoard = selectedBoard[0];
-
          dispatch({ selectedBoard });
          setRedirect(selectedBoard.name);
 
-         !selectedBoard.posts && fillPosts(selectedBoard.id);
+         if(! selectedBoard.posts)
+         {
+            selectedBoard.posts = await postRequests.FetchPosts(selectedBoard.id);
+            dispatch({ selectedBoard });
+         }
       }
       else
       {
          dispatch({ selectedBoard: null });
          setRedirect('');
       }
-   }
-
-   const fillPosts = async (boardId: int) =>
-   {
-      const boards = state.boards;
-      boards.filter(board => board.id === boardId)[0].posts = await postRequests.FetchPosts(boardId);
-
-      dispatch({ boards });
    }
 
    const fillBoards = async () =>
@@ -65,6 +59,15 @@ const BoardState = (props: any) =>
          fillBoards();
       }
    }, []);
+
+   useEffect(() => {
+      if(state.selectedBoard)
+      {
+         const boards = state.boards;
+         boards.filter((board) => board.id === state.selectedBoard.id)[0] = state.selectedBoard;
+         dispatch({ boards });
+      }
+   }, [state.selectedBoard])
 
    return (
       <Fragment>
