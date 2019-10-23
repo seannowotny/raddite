@@ -22,10 +22,10 @@ const BoardsListing = () =>
       <Fragment>
          <input value={boardInput} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
          <datalist id="boardDatalist">
-            {boards ? 
-            boards.map(board => (
+            {boards && boards.length > 0 
+            ?  boards.map(board => (
                   <option key={board.id} value={board.name}></option>)
-            ):<Fragment/>}
+            ): <Fragment/>}
          </datalist>
       </Fragment>
    );
