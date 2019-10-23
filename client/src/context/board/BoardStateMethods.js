@@ -1,19 +1,15 @@
 // @flow
 
-import React, { useContext } from 'react';
-import RedirectContext from '../redirect/redirectContext';
-
 export default class BoardStateMethods
 {
-   constructor(state: object, dispatch: any, boardRequests: any, postRequests: any)
+   constructor(state: object, dispatch: any, boardRequests: any, postRequests: any, setRedirect: any)
    {
       this.state = state;
       this.dispatch = dispatch;
       this.boardRequests = boardRequests;
       this.postRequests = postRequests;
+      this.setRedirect = setRedirect;
    }
-
-   setRedirect = useContext(RedirectContext).setRedirect;
 
    SetSelectedBoard = async (boardName: string) =>
    {

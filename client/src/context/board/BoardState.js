@@ -1,5 +1,5 @@
 // @flow
-import React, { useReducer, Fragment, useEffect } from 'react';
+import React, { useReducer, Fragment, useEffect, useContext } from 'react';
 import BoardRequests from '../../requests/BoardRequests';
 import PostRequests from '../../requests/PostRequests';
 import BoardStateMethods from './BoardStateMethods';
@@ -16,18 +16,18 @@ const BoardState = ({ children }) =>
       selectedBoard: null
    };
 
+   const { setRedirect, setAdditiveRedirect } = useContext(RedirectContext);
+
    const[state, dispatch] = useReducer(reducer, initialState);
 
    const boardRequests = new BoardRequests(dispatch);
    const postRequests = new PostRequests(dispatch);
    
-   const boardStateMethods = new BoardStateMethods(state, dispatch, boardRequests, postRequests);
-   const postStateMethods = new PostStateMethods(state, dispatch);
+   const boardStateMethods = new BoardStateMethods(state, dispatch, boardRequests, postRequests, setRedirect);
+   const postStateMethods = new PostStateMethods(state, dispatch, setAdditiveRedirect);
 
    const { FillBoards, SetSelectedBoard, UpdateSelectedBoard } = boardStateMethods;
    const { SetSelectedPost } = postStateMethods;
-
-   let errors = null;
 
    useEffect(() =>
    {

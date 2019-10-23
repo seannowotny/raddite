@@ -1,17 +1,13 @@
 // @flow
 
-import React, { useContext } from 'react';
-import RedirectContext from '../redirect/redirectContext';
-
 export default class PostStateMethods
 {
-   constructor(state, dispatch)
+   constructor(state: object, dispatch: any, setAdditiveRedirect: any)
    {
       this.state = state;
       this.dispatch = dispatch;
+      this.setAdditiveRedirect = setAdditiveRedirect;
    }
-
-   setAdditiveRedirect = useContext(RedirectContext).setAdditiveRedirect;
 
    SetSelectedPost = (postTitle) =>
    {

@@ -1,10 +1,8 @@
 // @flow
 
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import BoardContext from '../context/board/boardContext';
-import Home from '../components/pages/Home';
-import Board from '../components/pages/Board';
-import { BrowserRouter as Route, Switch, useParams, Redirect } from 'react-router-dom';
+import { BrowserRouter as useParams } from 'react-router-dom';
 
 const BoardRouter = (props: any) =>
 {
@@ -19,7 +17,7 @@ const BoardRouter = (props: any) =>
       {
          SetSelectedBoard(boardName);
       }
-   }, [boards]);
+   }, [boards, boardName, SetSelectedBoard]);
 
    return <Fragment>{props.children}</Fragment>;
 }
