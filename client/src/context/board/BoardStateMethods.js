@@ -38,12 +38,7 @@ export default class BoardStateMethods
          this.setRedirect('');
       }
    }
-
-   UpdateSelectedBoard = (selectedBoard: any) =>
-   {
-      this.dispatch({ selectedBoard });
-   }
-
+   
    FillBoards = async () =>
    {
       const boards = await this.boardRequests.FetchBoards();

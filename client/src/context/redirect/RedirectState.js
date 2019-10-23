@@ -1,5 +1,5 @@
 // @flow
-import React, { useReducer, Fragment, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import { Redirect } from 'react-router-dom';
 import reducer from '../reducer';
 import RedirectContext from './redirectContext';

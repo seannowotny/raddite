@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useEffect, Fragment, useState } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
 import BoardContext from '../../context/board/boardContext';
 
 const BoardsListing = () => 

@@ -21,6 +21,7 @@ function Post(props: any)
 
    return (
       <Fragment>
+         <h1>Post</h1>
          <div className="text-center">
             <button className="btn btn-secondary mt-3 mb-2" onClick={redirect}><h3>{post.title}</h3></button>
          </div>

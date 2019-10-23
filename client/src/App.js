@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import BoardRouter from './routers/BoardRouter';
 import PostRouter from './routers/PostRouter';

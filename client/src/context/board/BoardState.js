@@ -1,5 +1,5 @@
 // @flow
-import React, { useReducer, Fragment, useEffect, useContext } from 'react';
+import React, { useReducer, Fragment, useEffect } from 'react';
 import BoardRequests from '../../requests/BoardRequests';
 import PostRequests from '../../requests/PostRequests';
 import BoardStateMethods from './BoardStateMethods';
@@ -35,7 +35,7 @@ const BoardState = ({ children }) =>
       {
          FillBoards();
       }
-   }, []);
+   }, [state.boards, FillBoards]);
 
    useEffect(() =>
    {
@@ -49,10 +49,10 @@ const BoardState = ({ children }) =>
          {
             const board = state.selectedBoard;
             board.posts.filter(post => post.id === state.selectedPost.id)[0] = state.selectedPost;
-            UpdateSelectedBoard(board);
+            dispatch({ selectedBoard: board });
          }
       }
-   }, [state.selectedBoard])
+   }, [state.selectedBoard, state.boards, state.selectedPost])
 
    return (
       <Fragment>

@@ -12,13 +12,14 @@ const PostRouter = (props: any) =>
 
    const { selectedBoard, SetSelectedPost } = useContext(BoardContext);
 
-   // useEffect(() => 
-   // {
-   //    if(! currentPost)
-   //    {
-   //       SetSelectedPost(postName, selectedBoard);
-   //    }
-   // }, []);
+   useEffect(() => 
+   {
+      // if(! currentPost)
+      // {
+      //    SetSelectedPost(postName, selectedBoard);
+      // }
+      console.log('PostRouter');
+   }, []);
 
    return <Fragment>{props.children}</Fragment>;
 }
