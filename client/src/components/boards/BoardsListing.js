@@ -15,7 +15,7 @@ const BoardsListing = () =>
       const value = event.target.value;
       setBoardInput(value);
 
-      SetSelectedBoard(value, boardContext);
+      SetSelectedBoard(value);
    }
 
    return (

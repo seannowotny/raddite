@@ -17,7 +17,7 @@ const BoardRouter = (props: any) =>
    {
       if(boards)
       {
-         SetSelectedBoard(boardName, boardContext);
+         SetSelectedBoard(boardName);
       }
    }, [boards]);
 

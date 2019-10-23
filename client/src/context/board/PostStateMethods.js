@@ -5,16 +5,17 @@ import RedirectContext from '../redirect/redirectContext';
 
 export default class PostStateMethods
 {
-   constructor(dispatch)
+   constructor(state, dispatch)
    {
+      this.state = state;
       this.dispatch = dispatch;
-
-      this.setAdditiveRedirect = useContext(RedirectContext).setAdditiveRedirect;
    }
 
-   SetSelectedPost = (postTitle, selectedBoard) =>
+   setAdditiveRedirect = useContext(RedirectContext).setAdditiveRedirect;
+
+   SetSelectedPost = (postTitle) =>
    {
-      let selectedPost = selectedBoard.posts.filter(
+      let selectedPost = this.state.selectedBoard.posts.filter(
          post => post.title.toLowerCase() === postTitle.toLowerCase()
       );
 

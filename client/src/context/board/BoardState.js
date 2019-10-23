@@ -8,10 +8,8 @@ import reducer from '../reducer';
 import BoardContext from './boardContext';
 import RedirectContext from '../redirect/redirectContext';
 
-const BoardState = (props: any) =>
+const BoardState = ({ children }) =>
 {
-   const { setRedirect } = useContext(RedirectContext);
-
    const initialState = {
       errors: null,
       boards: null,
@@ -23,8 +21,8 @@ const BoardState = (props: any) =>
    const boardRequests = new BoardRequests(dispatch);
    const postRequests = new PostRequests(dispatch);
    
-   const boardStateMethods = new BoardStateMethods(dispatch, boardRequests, postRequests);
-   const postStateMethods = new PostStateMethods(dispatch);
+   const boardStateMethods = new BoardStateMethods(state, dispatch, boardRequests, postRequests);
+   const postStateMethods = new PostStateMethods(state, dispatch);
 
    const { FillBoards, SetSelectedBoard, UpdateSelectedBoard } = boardStateMethods;
    const { SetSelectedPost } = postStateMethods;
@@ -68,7 +66,7 @@ const BoardState = (props: any) =>
                   UpdateSelectedBoard,
                   SetSelectedPost
                }}>
-               { props.children }
+               { children }
             </BoardContext.Provider>
          }
       </Fragment>
