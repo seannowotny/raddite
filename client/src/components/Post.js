@@ -1,19 +1,16 @@
 // @flow
 
-import React, { useEffect, Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { setSelectedBoard } from '../actions/boardActions';
+import { setSelectedBoard, setSelectedPost } from '../actions/boardActions';
 
-function Post({ boards, selectedBoard, SetSelectedPost, id })
+function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
 {
-   const board = boards.filter(board => board.id === selectedBoard.id)[0];
-
-   const post = board.posts.filter(post => post.id === id)[0];
+   const post = selectedBoard.posts.filter(post => post.id === postId)[0];
 
    const redirect = () =>
    {
-      console.log(post.title + " POST.TITLE");
-      SetSelectedPost(post.title, selectedBoard);
+      setSelectedPost(postId);
    }
 
    return (
@@ -28,8 +25,7 @@ function Post({ boards, selectedBoard, SetSelectedPost, id })
 }
 
 const mapStateToProps = state => ({
-   boards: state.boards,
-   selectedBoard: state.selectedBoard
+   boardState: state.boardState
 });
 
-export default connect(mapStateToProps, { setSelectedBoard })(Post);
+export default connect(mapStateToProps, { setSelectedBoard, setSelectedPost })(Post);

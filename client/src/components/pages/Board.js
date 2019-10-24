@@ -5,7 +5,7 @@ import Router, { useParams, Redirect } from 'react-router-dom';
 import Post from '../Post';
 import { connect } from 'react-redux';
 
-const Board = ({ boards, selectedBoard }) =>
+const Board = ({ board: { boards, selectedBoard } }) =>
 {
    let board = null
    if(selectedBoard && boards)
@@ -24,8 +24,7 @@ const Board = ({ boards, selectedBoard }) =>
 }
 
 const mapStateToProps = state => ({
-   boards: state.boards,
-   selectedBoard: state.selectedBoard
+   boardState: state.boardState
 });
 
 export default connect(mapStateToProps, null)(Board);

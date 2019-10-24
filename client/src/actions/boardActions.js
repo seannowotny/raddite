@@ -18,9 +18,12 @@ export const getBoards = () => async (dispatch: Dispatch) =>
 {
    try
    {
+      console.log('getBoards');
       setLoading();
 
       const response = await axios.get('/api/boards');
+
+      console.log(response);
 
       dispatch({
          type: 'GET_BOARDS',

@@ -4,7 +4,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getBoards } from '../../actions/boardActions';
 
-const BoardsListing = ({ boards, setSelectedBoard, getBoards }) => 
+const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards }) => 
 {
    const [boardInput, setBoardInput] = useState('');
 
@@ -13,13 +13,16 @@ const BoardsListing = ({ boards, setSelectedBoard, getBoards }) =>
       const value = event.target.value;
       setBoardInput(value);
 
-      setSelectedBoard(value);
+      const board = boards.find(board => board.name.toLowerCase() === value.toLowerCase());
+
+      board && setSelectedBoard(board.id);
    }
 
    useEffect(() =>
    {
       if(! boards)
       { 
+         console.log('getBoards');
          getBoards();
       }   
    }, [boards, getBoards])
@@ -28,7 +31,7 @@ const BoardsListing = ({ boards, setSelectedBoard, getBoards }) =>
       <Fragment>
          <input value={boardInput} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
          <datalist id="boardDatalist">
-            {boards && boards.length > 0 
+            {boards
             ?  boards.map(board => (
                   <option key={board.id} value={board.name}></option>)
             ): <Fragment/>}
@@ -38,7 +41,7 @@ const BoardsListing = ({ boards, setSelectedBoard, getBoards }) =>
 };
 
 const mapStateToProps = state => ({
-   boards: state.boards
+   boardState: state.boardState
 });
 
 export default connect(mapStateToProps, { setSelectedBoard, getBoards })(BoardsListing);

@@ -3,7 +3,7 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
-function Post({ selectedBoard })
+function Post({ boardState: { selectedBoard }})
 {
    return (
       <Fragment>
@@ -15,7 +15,7 @@ function Post({ selectedBoard })
 }
 
 const mapStateToProps = state => ({
-   selectedBoard: state.selectedBoard
+   boardState: state.boardState
 });
 
 export default connect(mapStateToProps, null)(Post);

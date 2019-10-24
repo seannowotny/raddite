@@ -7,7 +7,7 @@ import { BrowserRouter as Route, Switch, useParams, Redirect } from 'react-route
 import { connect } from 'react-redux';
 import { setSelectedPost } from '../actions/boardActions';
 
-const PostRouter = ({ selectedBoard, setSelectedPost, children }) =>
+const PostRouter = ({ boardState: { selectedBoard }, setSelectedPost, children }) =>
 {
    const { postName } = useParams();
 
@@ -24,7 +24,7 @@ const PostRouter = ({ selectedBoard, setSelectedPost, children }) =>
 }
 
 const mapStateToProps = state => ({
-   selectedBoard: state.selectedBoard
+   boardState: state.boardState
 });
 
 export default connect(mapStateToProps, { setSelectedPost })(PostRouter);

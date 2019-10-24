@@ -33,11 +33,16 @@ export default (state: any = initialState, action: BoardAction) =>
             loading: false
          };
       case 'SET_SELECTED_BOARD':
+         {
+         console.log('BOARDS ' + state.boards);
+         console.log('PAYLOAD ' + action.payload);
+         console.log('SELECTED_BOARD ' + state.boards.find(board => board.id === action.payload));
          return {
             ...state,
             selectedBoard: state.boards.find(board => board.id === action.payload),
             loading: false
          };
+      }
       case 'SET_SELECTED_POST':
       {
          let result = null;
