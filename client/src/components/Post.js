@@ -1,17 +1,14 @@
 // @flow
 
-import React, { useContext, useEffect, Fragment, useState, Button } from 'react';
-import Router, { Link } from 'react-router-dom';
-import BoardContext from '../context/board/boardContext';
-import RedirectContext from '../context/redirect/redirectContext';
+import React, { useEffect, Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { setSelectedBoard } from '../actions/boardActions';
 
-function Post(props: any)
+function Post({ boards, selectedBoard, SetSelectedPost, id })
 {
-   const { boards, selectedBoard, SetSelectedPost } = useContext(BoardContext);
-
    const board = boards.filter(board => board.id === selectedBoard.id)[0];
 
-   const post = board.posts.filter(post => post.id === props.id)[0];
+   const post = board.posts.filter(post => post.id === id)[0];
 
    const redirect = () =>
    {
@@ -30,4 +27,9 @@ function Post(props: any)
    );
 }
 
-export default Post;
+const mapStateToProps = state => ({
+   boards: state.boards,
+   selectedBoard: state.selectedBoard
+});
+
+export default connect(mapStateToProps, { setSelectedBoard })(Post);

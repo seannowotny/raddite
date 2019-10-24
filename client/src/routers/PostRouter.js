@@ -1,16 +1,15 @@
 // @flow
 
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import BoardContext from '../context/board/boardContext';
+import React, { Fragment, useEffect, useState } from 'react';
 import Home from '../components/pages/Home';
 import Post from '../components/pages/Post';
 import { BrowserRouter as Route, Switch, useParams, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setSelectedPost } from '../actions/boardActions';
 
-const PostRouter = (props: any) =>
+const PostRouter = ({ selectedBoard, setSelectedPost, children }) =>
 {
    const { postName } = useParams();
-
-   const { selectedBoard, SetSelectedPost } = useContext(BoardContext);
 
    useEffect(() => 
    {
@@ -21,7 +20,11 @@ const PostRouter = (props: any) =>
       console.log('PostRouter');
    }, []);
 
-   return <Fragment>{props.children}</Fragment>;
+   return <Fragment>{children}</Fragment>;
 }
 
-export default PostRouter;
+const mapStateToProps = state => ({
+   selectedBoard: state.selectedBoard
+});
+
+export default connect(mapStateToProps, { setSelectedPost })(PostRouter);

@@ -3,23 +3,26 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import BoardContext from '../context/board/boardContext';
 import { BrowserRouter as useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setSelectedBoard } from '../actions/boardActions';
 
-const BoardRouter = (props: any) =>
+const BoardRouter = ({ setSelectedBoard, boards, children }) =>
 {
    const { boardName } = useParams();
-
-   const boardContext = useContext(BoardContext);
-   const { SetSelectedBoard, boards } = boardContext;
 
    useEffect(() => 
    {
       if(boards)
       {
-         SetSelectedBoard(boardName);
+         setSelectedBoard(boardName);
       }
-   }, [boards, boardName, SetSelectedBoard]);
+   }, [boards, boardName, setSelectedBoard]);
 
-   return <Fragment>{props.children}</Fragment>;
+   return <Fragment>{children}</Fragment>;
 }
 
-export default BoardRouter;
+const mapStateToProps = state => ({
+   boards: state.boards,
+});
+
+export default connect(mapStateToProps, { setSelectedBoard })(BoardRouter);

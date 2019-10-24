@@ -1,13 +1,11 @@
 // @flow
-import React, { useContext, Fragment, useState } from 'react';
-import BoardContext from '../../context/board/boardContext';
 
-const BoardsListing = () => 
+import React, { Fragment, useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setSelectedBoard, getBoards } from '../../actions/boardActions';
+
+const BoardsListing = ({ boards, setSelectedBoard, getBoards }) => 
 {
-   const boardContext = useContext(BoardContext);
-
-   const { boards, SetSelectedBoard } = boardContext;
-
    const [boardInput, setBoardInput] = useState('');
 
    const handleInputChange = (event: any) =>
@@ -15,8 +13,16 @@ const BoardsListing = () =>
       const value = event.target.value;
       setBoardInput(value);
 
-      SetSelectedBoard(value);
+      setSelectedBoard(value);
    }
+
+   useEffect(() =>
+   {
+      if(! boards)
+      { 
+         getBoards();
+      }   
+   }, [boards, getBoards])
 
    return (
       <Fragment>
@@ -29,6 +35,10 @@ const BoardsListing = () =>
          </datalist>
       </Fragment>
    );
-}
+};
 
-export default BoardsListing;
+const mapStateToProps = state => ({
+   boards: state.boards
+});
+
+export default connect(mapStateToProps, { setSelectedBoard, getBoards })(BoardsListing);

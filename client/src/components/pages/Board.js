@@ -1,14 +1,12 @@
 // @flow
 
-import React, { useContext, useEffect, Fragment, useState } from 'react';
+import React, { useEffect, Fragment, useState } from 'react';
 import Router, { useParams, Redirect } from 'react-router-dom';
 import Post from '../Post';
-import BoardContext from '../../context/board/boardContext';
+import { connect } from 'react-redux';
 
-const Board = (props: any) =>
+const Board = ({ boards, selectedBoard }) =>
 {
-   const { boards, selectedBoard } = useContext(BoardContext);
-
    let board = null
    if(selectedBoard && boards)
    {
@@ -25,4 +23,9 @@ const Board = (props: any) =>
    );
 }
 
-export default Board;
+const mapStateToProps = state => ({
+   boards: state.boards,
+   selectedBoard: state.selectedBoard
+});
+
+export default connect(mapStateToProps, null)(Board);
