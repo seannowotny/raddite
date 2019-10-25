@@ -27,7 +27,6 @@ const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, se
    {
       if(! boards)
       { 
-         console.log('getBoards');
          getBoards();
       }   
    }, [boards, getBoards])

@@ -1,7 +1,6 @@
 // @flow
 
 import type { BoardAction } from '../actions/boardActions';
-import { setSelectedBoard } from '../actions/boardActions';
 
 type Action = {
    payload: any,
@@ -40,9 +39,6 @@ export default (state: any = initialState, action: Action) =>
          };
       case 'SET_SELECTED_BOARD':
          {
-         console.log('BOARDS ' + state.boards);
-         console.log('PAYLOAD ' + action.payload);
-         console.log('SELECTED_BOARD ' + state.boards.find(board => board.id === action.payload));
          return {
             ...state,
             selectedBoard: state.boards.find(board => board.id === action.payload),

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 function Post({ boardState: { selectedBoard, selectedPost }})
@@ -23,4 +23,4 @@ const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, null)(Post);
+export default connect(mapStateToProps)(Post);

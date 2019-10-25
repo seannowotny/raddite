@@ -1,38 +1,38 @@
 // @flow
 
 import React, { Fragment, useEffect, useState } from 'react';
-import Home from '../components/pages/Home';
-import Post from '../components/pages/Post';
-import { BrowserRouter as Route, Switch, useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedPost } from '../actions/boardActions';
 import { setRedirect } from '../actions/redirectActions';
+import Post from '../components/pages/Post';
 
-const PostRouter = ({ boardState: { selectedBoard }, setSelectedPost, children }) =>
+const PostRouter = ({ boardState: { boards, selectedBoard }, setSelectedPost, setRedirect, children }) =>
 {
    const { postTitle } = useParams();
 
+   const [selectedPostWasSet, setSelectedPostWasSet] = useState(false);
+
+   //eslint-disable-next-line
    useEffect(() => 
    {
-      console.log(postTitle);
-      if(selectedBoard && selectedBoard.posts)
+      if(! selectedPostWasSet && selectedBoard && selectedBoard.posts)
       {
-         console.log('EXECUTE');
+         console.log('selectedBoard and selectedBoard.posts exist');
          const post = selectedBoard.posts.find(post => post.title.toLowerCase() === postTitle.toLowerCase());
-         console.log(post);
          if(post)
          {
             setSelectedPost(post.id);
+            setSelectedPostWasSet(true);
          }
          else
          {
-            setRedirect(`${selectedBoard.name}`);
+            setRedirect(`/${selectedBoard.name}`);
          }
       }
-      console.log('PostRouter');
-   }, [postTitle, selectedBoard, setSelectedPost]);
+   });
 
-   return <Fragment>{children}</Fragment>;
+   return <Post/>;
 }
 
 const mapStateToProps = state => ({

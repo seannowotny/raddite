@@ -31,6 +31,7 @@ function App() {
           <Route exact path='/' component={Home} />
 
           <Route exact path='/login' component={Login} />
+          
           <Route exact path='/register' component={Register} />
 
           <Route exact path='/profile/:userName' component={Profile} />
@@ -39,19 +40,21 @@ function App() {
             <BoardRouter>
               <Switch>
 
-                <Route path='/:boardName/:postTitle'>
+                <Route exact path='/:boardName' component={Board}/>
+
+                <Route exact path='/:boardName/:postTitle'>
                   <PostRouter>
-                    <Post/>
+                    
                   </PostRouter>
                 </Route>
+
+                <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
                 
-                <Board />
+                <Route exact path='/:boardName/create' component={PostCreate} />
 
               </Switch>
             </BoardRouter>
-          </Route>
-          <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
-          <Route exact path='/:boardName/create' component={PostCreate} />
+          </Route> 
           
         </Switch>
       </div>

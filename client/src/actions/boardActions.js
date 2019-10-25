@@ -18,12 +18,9 @@ export const getBoards = () => async (dispatch: Dispatch) =>
 {
    try
    {
-      console.log('getBoards');
       setLoading();
 
       const response = await axios.get('/api/boards');
-
-      console.log(response);
 
       dispatch({
          type: 'GET_BOARDS',
@@ -105,34 +102,30 @@ export const setSelectedPost = (postId: number) => async (dispatch: Dispatch) =>
 
 export const getPosts = (boardId: number) => async (dispatch: Dispatch) =>
 {
-   // try
-   // {
-      console.log('getPosts');
+   try
+   {
       setLoading();
 
       const response = await axios.get(`/api/posts/${boardId}`);
-
-      console.log(response);
 
       dispatch({
          type: 'GET_POSTS',
          payload: response.data
       });
-   // }
-   // catch(err)
-   // {
-   //    dispatch({
-   //       type: 'BOARDS_ERROR',
-   //       payload: err.response
-   //    });
-   // }
+   }
+   catch(err)
+   {
+      dispatch({
+         type: 'BOARDS_ERROR',
+         payload: err.response
+      });
+   }
 };
 
 // export const getComments = (postId: number) => async (dispatch: Dispatch) =>
 // {
 //    try
 //    {
-//       console.log('getComments');
 //       setLoading();
 
 //       const config = {
@@ -142,8 +135,6 @@ export const getPosts = (boardId: number) => async (dispatch: Dispatch) =>
 //       };
 
 //       const response = await axios.get('/api/comments', { postId }, config);
-
-//       console.log(response);
 
 //       dispatch({
 //          type: 'GET_COMMENTS',
