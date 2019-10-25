@@ -6,19 +6,31 @@ import Post from '../components/pages/Post';
 import { BrowserRouter as Route, Switch, useParams, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedPost } from '../actions/boardActions';
+import { setRedirect } from '../actions/redirectActions';
 
 const PostRouter = ({ boardState: { selectedBoard }, setSelectedPost, children }) =>
 {
-   const { postName } = useParams();
+   const { postTitle } = useParams();
 
    useEffect(() => 
    {
-      // if(! currentPost)
-      // {
-      //    SetSelectedPost(postName, selectedBoard);
-      // }
+      console.log(postTitle);
+      if(selectedBoard && selectedBoard.posts)
+      {
+         console.log('EXECUTE');
+         const post = selectedBoard.posts.find(post => post.title.toLowerCase() === postTitle.toLowerCase());
+         console.log(post);
+         if(post)
+         {
+            setSelectedPost(post.id);
+         }
+         else
+         {
+            setRedirect(`${selectedBoard.name}`);
+         }
+      }
       console.log('PostRouter');
-   }, []);
+   }, [postTitle, selectedBoard, setSelectedPost]);
 
    return <Fragment>{children}</Fragment>;
 }
@@ -27,4 +39,4 @@ const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, { setSelectedPost })(PostRouter);
+export default connect(mapStateToProps, { setSelectedPost, setRedirect })(PostRouter);

@@ -3,13 +3,18 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
-function Post({ boardState: { selectedBoard }})
+function Post({ boardState: { selectedBoard, selectedPost }})
 {
    return (
       <Fragment>
-         <h1>Board</h1>
-         <h1>{selectedBoard.selectedPost.title}</h1>
-         <p>{selectedBoard.selectedPost.body}</p>
+         <h1>Post</h1>
+         {selectedPost 
+         ?  <Fragment>
+            <h1>{selectedPost.title}</h1>
+            <p>{selectedPost.body}</p>
+            </Fragment>
+         :  <h1>Loading Post...</h1>
+         }
       </Fragment>
    );
 }

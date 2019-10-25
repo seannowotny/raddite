@@ -25,6 +25,7 @@ const BoardRouter = ({ setSelectedBoard, setRedirect, boardState: { boards }, ch
             setRedirect('/');
          }
       }
+      console.log('BoardRouter');
    }, [boards, boardName, setSelectedBoard, setRedirect]);
 
    return <Fragment>{children}</Fragment>;

@@ -3,14 +3,16 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, setSelectedPost } from '../actions/boardActions';
+import { setRedirect } from '../actions/redirectActions';
 
-function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
+function Post({ boardState: { selectedBoard }, setSelectedPost, setRedirect, postId })
 {
    let [post, setPost] = useState(null);
 
    const redirect = () =>
    {
       setSelectedPost(postId);
+      setRedirect(`/${selectedBoard.name}/${post.title}`);
    }
 
    useEffect(() => 
@@ -40,4 +42,4 @@ const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, { setSelectedBoard, setSelectedPost })(Post);
+export default connect(mapStateToProps, { setSelectedBoard, setSelectedPost, setRedirect })(Post);

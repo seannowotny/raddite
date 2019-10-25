@@ -35,19 +35,19 @@ function App() {
 
           <Route exact path='/profile/:userName' component={Profile} />
 
-          <Route exact path='/:boardName'>
+          <Route path='/:boardName'>
             <BoardRouter>
-              {/* <Switch> */}
+              <Switch>
 
-                {/* <Route exact path='/:boardName/:postName'>
+                <Route path='/:boardName/:postTitle'>
                   <PostRouter>
                     <Post/>
                   </PostRouter>
-                </Route> */}
+                </Route>
                 
                 <Board />
 
-              {/* </Switch> */}
+              </Switch>
             </BoardRouter>
           </Route>
           <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
