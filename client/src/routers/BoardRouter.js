@@ -4,8 +4,9 @@ import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedBoard } from '../actions/boardActions';
+import { setRedirect } from '../actions/redirectActions';
 
-const BoardRouter = ({ setSelectedBoard, boardState: { boards }, children }) =>
+const BoardRouter = ({ setSelectedBoard, setRedirect, boardState: { boards }, children }) =>
 {
    const { boardName } = useParams();
 
@@ -15,9 +16,16 @@ const BoardRouter = ({ setSelectedBoard, boardState: { boards }, children }) =>
       {
          let board = boards.find(board => board.name.toLowerCase() === boardName.toLowerCase());
 
-         board && setSelectedBoard(board.id);
+         if(board)
+         {
+            setSelectedBoard(board.id);
+         }
+         else
+         {
+            setRedirect('/');
+         }
       }
-   }, [boards, boardName, setSelectedBoard]);
+   }, [boards, boardName, setSelectedBoard, setRedirect]);
 
    return <Fragment>{children}</Fragment>;
 }
@@ -26,4 +34,4 @@ const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, { setSelectedBoard })(BoardRouter);
+export default connect(mapStateToProps, { setSelectedBoard, setRedirect })(BoardRouter);
