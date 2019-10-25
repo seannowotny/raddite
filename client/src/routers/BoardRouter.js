@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as useParams } from 'react-router-dom';
+import { BrowserRouter, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedBoard } from '../actions/boardActions';
 

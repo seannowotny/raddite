@@ -1,6 +1,12 @@
 // @flow
 
-import type { BoardAction } from '../actions/types';
+import type { BoardAction } from '../actions/boardActions';
+import { setSelectedBoard } from '../actions/boardActions';
+
+type Action = {
+   payload: any,
+   type: BoardAction
+};
 
 const initialState = {
    boards: null,
@@ -10,7 +16,7 @@ const initialState = {
    error: null,
 };
 
-export default (state: any = initialState, action: BoardAction) =>
+export default (state: any = initialState, action: Action) =>
 {
    switch(action.type)
    {
@@ -65,16 +71,28 @@ export default (state: any = initialState, action: BoardAction) =>
 
          return result;
       }    
+      case 'GET_POSTS':
+      {
+         let selectedBoard = state.selectedBoard;
+         selectedBoard.posts = action.payload;
+
+         return {
+            ...state,
+            selectedBoard,
+            loading: false
+         };
+      }
       case 'SET_LOADING':
          return {
             ...state,
             loading: true
          };
       default:
+      {
          return {
-            ...state,
-            // error: "ACTION_TYPE DOESN'T EXIST"
+            ...state
          };
+      }
    }
 }
 

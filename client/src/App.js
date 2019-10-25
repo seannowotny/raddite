@@ -12,6 +12,7 @@ import Profile from './components/pages/Profile';
 import Post from './components/pages/Post';
 import PostCreate from './components/pages/PostCreate';
 import PostEdit from './components/pages/PostEdit';
+import Redirector from './components/Redirector';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -23,6 +24,7 @@ function App() {
   return (
   <Router>
     <Provider store={store}>
+      <Redirector/>
       <Navbar />
       <div className="container">
         <Switch>
@@ -35,17 +37,17 @@ function App() {
 
           <Route exact path='/:boardName'>
             <BoardRouter>
-              <Switch>
+              {/* <Switch> */}
 
-                <Route exact path='/:boardName/:postName'>
+                {/* <Route exact path='/:boardName/:postName'>
                   <PostRouter>
                     <Post/>
                   </PostRouter>
-                </Route>
+                </Route> */}
                 
                 <Board />
 
-              </Switch>
+              {/* </Switch> */}
             </BoardRouter>
           </Route>
           <Route exact path='/:boardName/:postName/edit' component={PostEdit} />

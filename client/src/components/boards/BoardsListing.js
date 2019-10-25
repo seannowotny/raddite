@@ -3,8 +3,9 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getBoards } from '../../actions/boardActions';
+import { setRedirect } from '../../actions/redirectActions';
 
-const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards }) => 
+const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect }) => 
 {
    const [boardInput, setBoardInput] = useState('');
 
@@ -15,7 +16,11 @@ const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards }) 
 
       const board = boards.find(board => board.name.toLowerCase() === value.toLowerCase());
 
-      board && setSelectedBoard(board.id);
+      if(board)
+      {
+         setSelectedBoard(board.id);
+         setRedirect('/' + board.name);
+      }
    }
 
    useEffect(() =>
@@ -44,4 +49,4 @@ const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, { setSelectedBoard, getBoards })(BoardsListing);
+export default connect(mapStateToProps, { setSelectedBoard, getBoards, setRedirect })(BoardsListing);

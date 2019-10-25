@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-import type { BoardAction } from './types';
+export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'SET_LOADING';
 
 type Dispatch = ({
    type: BoardAction,
@@ -69,36 +69,92 @@ export const addBoard = (board: any) => async (dispatch: Dispatch) =>
 
 export const setSelectedBoard = (boardId: number) => async (dispatch: Dispatch) =>
 {
-   // try
-   // {
+   try
+   {
       dispatch({
          type:'SET_SELECTED_BOARD',
          payload: boardId
       });
-   // }
-   // catch(err)
-   // {
-   //    dispatch({
-   //       type: 'BOARDS_ERROR',
-   //       payload: err.response.data
-   //    });
-   // }
+   }
+   catch(err)
+   {
+      dispatch({
+         type: 'BOARDS_ERROR',
+         payload: err.response.data
+      });
+   }
 };
 
 export const setSelectedPost = (postId: number) => async (dispatch: Dispatch) =>
 {
-   // try
-   // {
+   try
+   {
       dispatch({
          type:'SET_SELECTED_POST',
          payload: postId
+      });
+   }
+   catch(err)
+   {
+      dispatch({
+         type: 'BOARDS_ERROR',
+         payload: err.response.data
+      });
+   }
+};
+
+export const getPosts = (boardId: number) => async (dispatch: Dispatch) =>
+{
+   // try
+   // {
+      console.log('getPosts');
+      setLoading();
+
+      const response = await axios.get(`/api/posts/${boardId}`);
+
+      console.log(response);
+
+      dispatch({
+         type: 'GET_POSTS',
+         payload: response.data
       });
    // }
    // catch(err)
    // {
    //    dispatch({
    //       type: 'BOARDS_ERROR',
-   //       payload: err.response.data
+   //       payload: err.response
    //    });
    // }
 };
+
+// export const getComments = (postId: number) => async (dispatch: Dispatch) =>
+// {
+//    try
+//    {
+//       console.log('getComments');
+//       setLoading();
+
+//       const config = {
+//          headers: {
+//             'Content-Type': 'application/json'
+//          }
+//       };
+
+//       const response = await axios.get('/api/comments', { postId }, config);
+
+//       console.log(response);
+
+//       dispatch({
+//          type: 'GET_COMMENTS',
+//          payload: response.data
+//       });
+//    }
+//    catch(err)
+//    {
+//       dispatch({
+//          type: 'BOARDS_ERROR',
+//          payload: err.response.data
+//       });
+//    }
+// }

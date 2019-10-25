@@ -4,27 +4,32 @@ import React, { useEffect, Fragment, useState } from 'react';
 import Router, { useParams, Redirect } from 'react-router-dom';
 import Post from '../Post';
 import { connect } from 'react-redux';
+import { getPosts } from '../../actions/boardActions';
 
-const Board = ({ board: { boards, selectedBoard } }) =>
+const Board = ({ boardState: { selectedBoard }, getPosts }) =>
 {
-   let board = null
-   if(selectedBoard && boards)
+   useEffect(() =>
    {
-      board = boards.filter(board => board.id === selectedBoard.id)[0];
-   }
+      if(selectedBoard && ! selectedBoard.posts)
+      {
+         console.log('GETPOSTS');
+         getPosts(selectedBoard.id);
+      }
+   }, [selectedBoard, getPosts]);
 
    return (
       <Fragment>
-         <h1>{board && board.name}</h1>
+         <h1>Board</h1>
+         <h1>{selectedBoard && selectedBoard.name}</h1>
          <Fragment>
-            {board && board.posts ? board.posts.map(post => <Post key={post.id} id={post.id} />) : <h1>Loading Posts...</h1>}
+            {selectedBoard && selectedBoard.posts ? selectedBoard.posts.map(post => <Post key={post.id} postId={post.id} />) : <h1>Loading Board...</h1>}
          </Fragment>
       </Fragment>
    );
-}
+};
 
 const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, null)(Board);
+export default connect(mapStateToProps, { getPosts })(Board);
