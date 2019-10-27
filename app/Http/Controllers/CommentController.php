@@ -22,7 +22,7 @@ class CommentController extends Controller
      */
     public function index(int $id)
     {
-        $comments = Post::find($id)->comments;
+        $comments = Post::find($id)->comments->whereNull('comment_id');
 
         return response(CommentResource::collection($comments), 200);
     }
