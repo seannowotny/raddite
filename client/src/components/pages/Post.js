@@ -1,19 +1,26 @@
 // @flow
 
-import React, { useContext, useEffect, Fragment, useState } from 'react';
-import BoardContext from '../../context/board/boardContext';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 
-function Board(props: any)
+function Post({ boardState: { selectedBoard, selectedPost }})
 {
-   const { selectedBoard } = useContext(BoardContext);
-
    return (
       <Fragment>
-         <h1>Board</h1>
-         <h1>{selectedBoard.selectedPost.title}</h1>
-         <p>{selectedBoard.selectedPost.body}</p>
+         <h1>Post</h1>
+         {selectedPost 
+         ?  <Fragment>
+            <h1>{selectedPost.title}</h1>
+            <p>{selectedPost.body}</p>
+            </Fragment>
+         :  <h1>Loading Post...</h1>
+         }
       </Fragment>
    );
 }
 
-export default Board;
+const mapStateToProps = state => ({
+   boardState: state.boardState
+});
+
+export default connect(mapStateToProps)(Post);

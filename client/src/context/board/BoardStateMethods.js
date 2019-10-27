@@ -1,22 +1,19 @@
 // @flow
 
-import React, { useContext } from 'react';
-import RedirectContext from '../redirect/redirectContext';
-
 export default class BoardStateMethods
 {
-   constructor(dispatch: any, boardRequests:any, postRequests: any)
+   constructor(state: object, dispatch: any, boardRequests: any, postRequests: any, setRedirect: any)
    {
+      this.state = state;
       this.dispatch = dispatch;
       this.boardRequests = boardRequests;
       this.postRequests = postRequests;
+      this.setRedirect = setRedirect;
    }
 
-   setRedirect = useContext(RedirectContext).setRedirect;
-
-   SetSelectedBoard = async (boardName: string, state: any) =>
+   SetSelectedBoard = async (boardName: string) =>
    {
-      let selectedBoard = state.boards.find(
+      let selectedBoard = this.state.boards.find(
          board => board.name.toLowerCase() === boardName.toLowerCase()
       );
 
@@ -37,12 +34,7 @@ export default class BoardStateMethods
          this.setRedirect('');
       }
    }
-
-   UpdateSelectedBoard = (selectedBoard: any) =>
-   {
-      this.dispatch({ selectedBoard });
-   }
-
+   
    FillBoards = async () =>
    {
       const boards = await this.boardRequests.FetchBoards();

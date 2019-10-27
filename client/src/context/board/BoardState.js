@@ -8,28 +8,26 @@ import reducer from '../reducer';
 import BoardContext from './boardContext';
 import RedirectContext from '../redirect/redirectContext';
 
-const BoardState = (props: any) =>
+const BoardState = ({ children }) =>
 {
-   const { setRedirect } = useContext(RedirectContext);
-
    const initialState = {
       errors: null,
       boards: null,
       selectedBoard: null
    };
 
+   const { setRedirect, setAdditiveRedirect } = useContext(RedirectContext);
+
    const[state, dispatch] = useReducer(reducer, initialState);
 
    const boardRequests = new BoardRequests(dispatch);
    const postRequests = new PostRequests(dispatch);
    
-   const boardStateMethods = new BoardStateMethods(dispatch, boardRequests, postRequests);
-   const postStateMethods = new PostStateMethods(dispatch);
+   const boardStateMethods = new BoardStateMethods(state, dispatch, boardRequests, postRequests, setRedirect);
+   const postStateMethods = new PostStateMethods(state, dispatch, setAdditiveRedirect);
 
    const { FillBoards, SetSelectedBoard, UpdateSelectedBoard } = boardStateMethods;
    const { SetSelectedPost } = postStateMethods;
-
-   let errors = null;
 
    useEffect(() =>
    {
@@ -37,7 +35,7 @@ const BoardState = (props: any) =>
       {
          FillBoards();
       }
-   }, []);
+   }, [state.boards, FillBoards]);
 
    useEffect(() =>
    {
@@ -51,10 +49,10 @@ const BoardState = (props: any) =>
          {
             const board = state.selectedBoard;
             board.posts.filter(post => post.id === state.selectedPost.id)[0] = state.selectedPost;
-            UpdateSelectedBoard(board);
+            dispatch({ selectedBoard: board });
          }
       }
-   }, [state.selectedBoard])
+   }, [state.selectedBoard, state.boards, state.selectedPost])
 
    return (
       <Fragment>
@@ -68,7 +66,7 @@ const BoardState = (props: any) =>
                   UpdateSelectedBoard,
                   SetSelectedPost
                }}>
-               { props.children }
+               { children }
             </BoardContext.Provider>
          }
       </Fragment>

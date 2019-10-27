@@ -1,7 +1,6 @@
 // @flow
 
-import React, { useContext, useEffect, Fragment, useState } from 'react';
-import BoardContext from '../../context/board/boardContext';
+import React from 'react';
 
 const Home = (props: any) =>
 {

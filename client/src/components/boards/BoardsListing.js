@@ -1,13 +1,12 @@
 // @flow
-import React, { useContext, useEffect, Fragment, useState } from 'react';
-import BoardContext from '../../context/board/boardContext';
 
-const BoardsListing = () => 
+import React, { Fragment, useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setSelectedBoard, getBoards } from '../../actions/boardActions';
+import { setRedirect } from '../../actions/redirectActions';
+
+const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect }) => 
 {
-   const boardContext = useContext(BoardContext);
-
-   const { boards, SetSelectedBoard } = boardContext;
-
    const [boardInput, setBoardInput] = useState('');
 
    const handleInputChange = (event: any) =>
@@ -15,20 +14,38 @@ const BoardsListing = () =>
       const value = event.target.value;
       setBoardInput(value);
 
-      SetSelectedBoard(value, boardContext);
+      const board = boards.find(board => board.name.toLowerCase() === value.toLowerCase());
+
+      if(board)
+      {
+         setSelectedBoard(board.id);
+         setRedirect('/' + board.name);
+      }
    }
+
+   useEffect(() =>
+   {
+      if(! boards)
+      { 
+         getBoards();
+      }   
+   }, [boards, getBoards])
 
    return (
       <Fragment>
          <input value={boardInput} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
          <datalist id="boardDatalist">
-            {boards && boards.length > 0 
+            {boards
             ?  boards.map(board => (
                   <option key={board.id} value={board.name}></option>)
             ): <Fragment/>}
          </datalist>
       </Fragment>
    );
-}
+};
 
-export default BoardsListing;
+const mapStateToProps = state => ({
+   boardState: state.boardState
+});
+
+export default connect(mapStateToProps, { setSelectedBoard, getBoards, setRedirect })(BoardsListing);

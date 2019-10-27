@@ -1,27 +1,41 @@
 // @flow
 
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import BoardContext from '../context/board/boardContext';
-import Home from '../components/pages/Home';
-import Board from '../components/pages/Board';
-import { BrowserRouter as Route, Switch, useParams, Redirect } from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setSelectedBoard, getPosts } from '../actions/boardActions';
+import { setRedirect } from '../actions/redirectActions';
 
-const BoardRouter = (props: any) =>
+const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { boards, selectedBoard }, children }) =>
 {
    const { boardName } = useParams();
-
-   const boardContext = useContext(BoardContext);
-   const { SetSelectedBoard, boards } = boardContext;
 
    useEffect(() => 
    {
       if(boards)
       {
-         SetSelectedBoard(boardName, boardContext);
-      }
-   }, [boards]);
+         let board = boards.find(board => board.name.toLowerCase() === boardName.toLowerCase());
 
-   return <Fragment>{props.children}</Fragment>;
+         if(board)
+         {
+            setSelectedBoard(board.id);
+         }
+         else
+         {
+            setRedirect('/');
+         }
+      }
+      if(selectedBoard)
+      {
+         getPosts(selectedBoard.id);
+      }
+   }, [boards, boardName, setSelectedBoard, setRedirect, selectedBoard, getPosts]);
+
+   return <Fragment>{children}</Fragment>;
 }
 
-export default BoardRouter;
+const mapStateToProps = state => ({
+   boardState: state.boardState
+});
+
+export default connect(mapStateToProps, { setSelectedBoard, setRedirect, getPosts })(BoardRouter);

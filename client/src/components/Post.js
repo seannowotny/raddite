@@ -1,32 +1,45 @@
 // @flow
 
-import React, { useContext, useEffect, Fragment, useState, Button } from 'react';
-import Router, { Link } from 'react-router-dom';
-import BoardContext from '../context/board/boardContext';
-import RedirectContext from '../context/redirect/redirectContext';
+import React, { Fragment, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { setSelectedBoard, setSelectedPost } from '../actions/boardActions';
+import { setRedirect } from '../actions/redirectActions';
 
-function Post(props: any)
+function Post({ boardState: { selectedBoard }, setSelectedPost, setRedirect, postId })
 {
-   const { boards, selectedBoard, SetSelectedPost } = useContext(BoardContext);
-
-   const board = boards.filter(board => board.id === selectedBoard.id)[0];
-
-   const post = board.posts.filter(post => post.id === props.id)[0];
+   let [post, setPost] = useState(null);
 
    const redirect = () =>
    {
-      console.log(post.title + " POST.TITLE");
-      SetSelectedPost(post.title, selectedBoard);
+      setSelectedPost(postId);
+      setRedirect(`/${selectedBoard.name}/${post.title}`);
    }
+
+   useEffect(() => 
+   {
+      if(selectedBoard && selectedBoard.posts)
+      {
+         setPost(selectedBoard.posts.find(post => post.id === postId));
+      }
+   }, [selectedBoard, postId])
 
    return (
       <Fragment>
-         <div className="text-center">
-            <button className="btn btn-secondary mt-3 mb-2" onClick={redirect}><h3>{post.title}</h3></button>
-         </div>
-         <p>{post.body}</p>
+         <h1>Post {postId}</h1>
+         {post 
+         ?  <Fragment>
+               <div className="text-center">
+                  <button className="btn btn-secondary mt-3 mb-2" onClick={redirect}><h3>{post.title}</h3></button>
+               </div>
+               <p>{post.body}</p>
+            </Fragment>
+         :  <h1>Loading Post...</h1>}
       </Fragment>
    );
 }
 
-export default Post;
+const mapStateToProps = state => ({
+   boardState: state.boardState
+});
+
+export default connect(mapStateToProps, { setSelectedBoard, setSelectedPost, setRedirect })(Post);

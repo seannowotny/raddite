@@ -20,13 +20,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(int $id)
     {
-        $request->validate([
-            'postId' => 'required|integer|exists:posts,id',
-        ]);
-
-        $comments = Post::find($request->postId)->comments;
+        $comments = Post::find($id)->comments;
 
         return response(CommentResource::collection($comments), 200);
     }

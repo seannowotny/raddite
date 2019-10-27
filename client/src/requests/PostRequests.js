@@ -1,7 +1,6 @@
 // @flow
 
 import axios from 'axios';
-import Post from '../structs/Post';
 
 export default class PostRequests
 {

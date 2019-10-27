@@ -20,13 +20,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(int $id)
     {
-        $request->validate([
-            'boardId' => 'required|integer|exists:boards,id'
-        ]);
-
-        $posts = Board::find($request->boardId)->posts;
+        $posts = Board::find($id)->posts;
 
         return response(PostResource::collection($posts), 200);
     }
