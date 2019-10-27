@@ -44,7 +44,7 @@ function App() {
 
                 <Route exact path='/:boardName/:postTitle'>
                   <PostRouter>
-                    
+                    <Post/>
                   </PostRouter>
                 </Route>
 

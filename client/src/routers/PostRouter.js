@@ -32,7 +32,7 @@ const PostRouter = ({ boardState: { boards, selectedBoard }, setSelectedPost, se
       }
    });
 
-   return <Post/>;
+   return <Fragment>{children}</Fragment>;
 }
 
 const mapStateToProps = state => ({
