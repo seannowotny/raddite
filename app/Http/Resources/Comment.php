@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\User as UserResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Comment extends JsonResource
@@ -15,9 +17,10 @@ class Comment extends JsonResource
     public function toArray($request)
     {
         return [
-            'userId' => $this->user_id,
+            'user' => new UserResource($this->user),
             'content' => $this->content,
-            'updatedAt' => $this->update_at,
+            'updatedAt' => $this->updated_at->diffForHumans(),
+            'createdAt' => $this->created_at->diffForHumans(),
         ];
     }
 }

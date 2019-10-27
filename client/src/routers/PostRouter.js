@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedPost } from '../actions/boardActions';
 import { setRedirect } from '../actions/redirectActions';
-import Post from '../components/pages/Post';
 
 const PostRouter = ({ boardState: { boards, selectedBoard }, setSelectedPost, setRedirect, children }) =>
 {
