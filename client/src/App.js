@@ -15,7 +15,6 @@ import PostEdit from './components/pages/PostEdit';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import { Provider } from 'react-redux';
-import Hydrater from './components/Hydrater';
 import { store, persistor } from './store';
 import history from './helpers/history';
 
@@ -29,7 +28,6 @@ function App()
   <Router history={history}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Hydrater />
         <Navbar />
         <BackButton />
         <div className="container">

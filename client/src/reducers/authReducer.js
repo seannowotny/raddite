@@ -33,16 +33,6 @@ export default (state: any = initialState, action: Action) =>
             error: action.payload.errors
          };
       }
-      case 'GET_PERSISTED_AUTH_STATE':
-      {
-         const state = localStorage.getItem('state');
-         let authState = null;
-         if(state)
-         {
-            authState = state.authState;
-         }
-         return { state: authState };
-      }
       default:
          return {
             ...state

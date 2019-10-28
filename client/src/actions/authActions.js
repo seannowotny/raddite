@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-export type AuthAction = 'LOGIN' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'GET_PERSISTED_AUTH_STATE';
+export type AuthAction = 'LOGIN' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'SET_STATE';
 
 type Dispatch = ({
    type: AuthAction,
@@ -33,12 +33,4 @@ export const login = (credentials) => async (dispatch: Dispatch) =>
          payload: err.response.data
       });
    }
-};
-
-export const getPersistedAuthState = () => async (dispatch: Dispatch) =>
-{
-   dispatch({
-      type: 'GET_PERSISTED_AUTH_STATE',
-      payload: null
-   });
 };
