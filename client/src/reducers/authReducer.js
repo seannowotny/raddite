@@ -1,7 +1,6 @@
 // @flow
 
 import type { AuthAction } from '../actions/authActions';
-import Persister from '../helpers/Persister';
 
 type Action = {
    type: AuthAction,
@@ -14,9 +13,6 @@ const initialState = {
    error: null
 };
 
-const persister = new Persister('authState');
-const { persist } = persister;
-
 export default (state: any = initialState, action: Action) =>
 {
    switch(action.type)
@@ -28,7 +24,6 @@ export default (state: any = initialState, action: Action) =>
             authenticatedAs: action.payload.user,
             token: action.payload.access_token
          };
-         persist(result);
          return result;
       }
       case 'AUTH_ERROR':

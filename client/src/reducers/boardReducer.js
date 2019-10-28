@@ -1,7 +1,6 @@
 // @flow
 
 import type { BoardAction } from '../actions/boardActions';
-import Persister from '../helpers/Persister';
 
 type Action = {
    payload: any,
@@ -15,9 +14,6 @@ const initialState = {
    loading: false,
    error: null,
 };
-
-const persister = new Persister('boardState');
-const { persist } = persister;
 
 export default (state: any = initialState, action: Action) =>
 {
@@ -34,7 +30,6 @@ export default (state: any = initialState, action: Action) =>
             selectedPost,
             loading: false
          };
-         persist(result);
          return result;
       }
       case 'ADD_BOARD':
@@ -44,7 +39,6 @@ export default (state: any = initialState, action: Action) =>
             boards: action.payload,
             loading: false
          };
-         persist(result);
          return result;
       }
       case 'SET_SELECTED_BOARD':
@@ -87,7 +81,6 @@ export default (state: any = initialState, action: Action) =>
             selectedBoard,
             loading: false
          };
-         persist(result);
          return result;
       }
       case 'SET_LOADING':
