@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-export type AuthAction = 'LOGIN' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR';
+export type AuthAction = 'LOGIN' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'SET_STATE';
 
 type Dispatch = ({
    type: AuthAction,
@@ -34,3 +34,11 @@ export const login = (credentials) => async (dispatch: Dispatch) =>
       });
    }
 };
+
+export const setState = state => async (dispatch: Dispatch) =>
+{
+   dispatch({
+      type: 'SET_STATE',
+      payload: state,
+   });
+}

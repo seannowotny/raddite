@@ -15,16 +15,19 @@ import PostEdit from './components/pages/PostEdit';
 import Redirector from './components/Redirector';
 
 import { Provider } from 'react-redux';
+import Persister from './components/Persister';
 import store from './store';
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import BackButton from './components/layout/buttons/BackButton';
 
-function App() {
+function App() 
+{
   return (
   <Router>
     <Provider store={store}>
+      <Persister />
       <Redirector/>
       <Navbar />
       <BackButton />

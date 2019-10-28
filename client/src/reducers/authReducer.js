@@ -32,6 +32,14 @@ export default (state: any = initialState, action: Action) =>
             error: action.payload.errors
          };
       }
+      case 'SET_STATE':
+      {
+         const { authenticatedAs, token } = action.payload;
+         return {
+            authenticatedAs,
+            token
+         };
+      }
       default:
          return {
             ...state
