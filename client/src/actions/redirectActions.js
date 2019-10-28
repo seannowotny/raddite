@@ -47,3 +47,21 @@ export const setAdditiveRedirect = (uriAddition: string) => async (dispatch: Dis
       });
    }
 };
+
+export const goBack = (history) => async (dispatch: Dispatch) =>
+{
+   try
+   {   
+      dispatch({
+         type: 'GO_BACK',
+         payload: history
+      });
+   }
+   catch(err)
+   {
+      dispatch({
+         type: 'REDIRECT_ERROR',
+         payload: err.response.data
+      });
+   }
+}

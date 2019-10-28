@@ -19,6 +19,7 @@ import store from './store';
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
+import BackButton from './components/layout/buttons/BackButton';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
     <Provider store={store}>
       <Redirector/>
       <Navbar />
+      <BackButton />
       <div className="container">
         <Switch>
           <Route exact path='/' component={Home} />

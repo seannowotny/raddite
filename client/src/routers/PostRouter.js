@@ -17,7 +17,7 @@ const PostRouter = ({ boardState: { boards, selectedBoard }, setSelectedPost, se
    {
       if(! selectedPostWasSet && selectedBoard && selectedBoard.posts)
       {
-         console.log('selectedBoard and selectedBoard.posts exist');
+         // console.log('selectedBoard and selectedBoard.posts exist');
          const post = selectedBoard.posts.find(post => post.title.toLowerCase() === postTitle.toLowerCase());
          if(post)
          {
