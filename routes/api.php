@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('auth', 'AuthController@login');
-Route::post('auth', 'AuthController@register');
+Route::post('auth/login', 'AuthController@login');
+Route::post('auth/register', 'AuthController@register');
 
 Route::apiResource('users', 'UserController')->only(['show']);
 Route::get('user', 'UserController@current');
