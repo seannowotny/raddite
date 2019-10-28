@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/authActions';
 import { setRedirect } from '../../actions/redirectActions';
