@@ -19,6 +19,8 @@ export default (state: any = initialState, action: Action) =>
 {
    switch(action.type)
    {
+      case 'persist/REHYDRATE':
+         return { ...action.payload.boardState }
       case 'GET_BOARDS':
       {
          const { selectedBoard, selectedPost } = updateSelected(state);

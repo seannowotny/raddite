@@ -17,6 +17,8 @@ export default (state: any = initialState, action: Action) =>
 {
    switch(action.type)
    {
+      case 'persist/REHYDRATE':
+         return { ...action.payload.authState }
       case 'LOGIN':
       {
          const result = {

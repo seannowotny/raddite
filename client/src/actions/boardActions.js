@@ -22,33 +22,20 @@ export const getBoards = () => async (dispatch: Dispatch) =>
 
    try
    {
-      result = JSON.parse(localStorage.getItem('state')).state.boardState.boards;
+      result = await axios.get('/api/boards');
+      result = result.data;
 
       dispatch({
          type: 'GET_BOARDS',
          payload: result
       });
    }
-   catch(err) { logHarmlessError(err); }
-   finally
+   catch(err)
    {
-      try
-      {
-         result = await axios.get('/api/boards');
-         result = result.data;
-
-         dispatch({
-            type: 'GET_BOARDS',
-            payload: result
-         });
-      }
-      catch(err)
-      {
-         dispatch({
-            type: 'BOARDS_ERROR',
-            payload: err.response
-         });
-      }
+      dispatch({
+         type: 'BOARDS_ERROR',
+         payload: err.response
+      });
    }
 };
 
@@ -121,35 +108,23 @@ export const getPosts = (boardId: number) => async (dispatch: Dispatch) =>
    setLoading();
 
    let result = null;
+
    try
    {
-      result = JSON.parse(localStorage.getItem('state')).state.boardState.selectedBoard.posts;
+      result = await axios.get(`/api/posts/${boardId}`);
+      result = result.data;
 
       dispatch({
          type: 'GET_POSTS',
          payload: result
       });
    }
-   catch(err) { logHarmlessError(err); }
-   finally
+   catch(err)
    {
-      try
-      {
-         result = await axios.get(`/api/posts/${boardId}`);
-         result = result.data;
-
-         dispatch({
-            type: 'GET_POSTS',
-            payload: result
-         });
-      }
-      catch(err)
-      {
-         dispatch({
-            type: 'BOARDS_ERROR',
-            payload: err.response.data
-         });
-      }
+      dispatch({
+         type: 'BOARDS_ERROR',
+         payload: err.response.data
+      });
    }
 };
 
