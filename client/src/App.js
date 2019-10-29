@@ -12,10 +12,11 @@ import Profile from './components/pages/Profile';
 import Post from './components/pages/Post';
 import PostCreate from './components/pages/PostCreate';
 import PostEdit from './components/pages/PostEdit';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import { Provider } from 'react-redux';
 import Hydrater from './components/Hydrater';
-import store from './store';
+import { store, persistor } from './store';
 import history from './helpers/history';
 
 import './App.css';
@@ -27,41 +28,43 @@ function App()
   return (
   <Router history={history}>
     <Provider store={store}>
-      <Hydrater />
-      <Navbar />
-      <BackButton />
-      <div className="container">
-        <Switch>
-          <Route exact path='/' component={Home} />
+      <PersistGate loading={null} persistor={persistor}>
+        <Hydrater />
+        <Navbar />
+        <BackButton />
+        <div className="container">
+          <Switch>
+            <Route exact path='/' component={Home} />
 
-          <Route exact path='/login' component={Login} />
-          
-          <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            
+            <Route exact path='/register' component={Register} />
 
-          <Route exact path='/profile/:userName' component={Profile} />
+            <Route exact path='/profile/:userName' component={Profile} />
 
-          <Route path='/:boardName'>
-            <BoardRouter>
-              <Switch>
+            <Route path='/:boardName'>
+              <BoardRouter>
+                <Switch>
 
-                <Route exact path='/:boardName' component={Board}/>
+                  <Route exact path='/:boardName' component={Board}/>
 
-                <Route exact path='/:boardName/:postTitle'>
-                  <PostRouter>
-                    <Post/>
-                  </PostRouter>
-                </Route>
+                  <Route exact path='/:boardName/:postTitle'>
+                    <PostRouter>
+                      <Post/>
+                    </PostRouter>
+                  </Route>
 
-                <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
-                
-                <Route exact path='/:boardName/create' component={PostCreate} />
+                  <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
+                  
+                  <Route exact path='/:boardName/create' component={PostCreate} />
 
-              </Switch>
-            </BoardRouter>
-          </Route> 
-          
-        </Switch>
-      </div>
+                </Switch>
+              </BoardRouter>
+            </Route> 
+            
+          </Switch>
+        </div>
+      </PersistGate>
     </Provider>
   </Router>
   );
