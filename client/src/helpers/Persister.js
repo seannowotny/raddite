@@ -9,8 +9,10 @@ export default class Persister
 
    persist = (data_: any) =>
    {
-      let data = {state: {}};
-      const ls = localStorage.getItem('state');
+      let data = {
+         state: {}
+      };
+      const ls = JSON.parse(localStorage.getItem('state'));
       if(ls)
       {
          data = ls;

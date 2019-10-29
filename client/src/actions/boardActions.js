@@ -1,7 +1,7 @@
 // @flow
 
-import axios from "axios";
-
+import axios from 'axios';
+import { logHarmlessError } from '../helpers/Logging';
 export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'SET_LOADING';
 
 type Dispatch = ({
@@ -16,23 +16,39 @@ export const setLoading = () =>
 
 export const getBoards = () => async (dispatch: Dispatch) =>
 {
+   setLoading();
+
+   let result = null;
+
    try
    {
-      setLoading();
-
-      const response = await axios.get('/api/boards');
+      result = JSON.parse(localStorage.getItem('state')).state.boardState.boards;
 
       dispatch({
          type: 'GET_BOARDS',
-         payload: response.data
+         payload: result
       });
    }
-   catch(err)
+   catch(err) { logHarmlessError(err); }
+   finally
    {
-      dispatch({
-         type: 'BOARDS_ERROR',
-         payload: err.response.data
-      });
+      try
+      {
+         result = await axios.get('/api/boards');
+         result = result.data;
+
+         dispatch({
+            type: 'GET_BOARDS',
+            payload: result
+         });
+      }
+      catch(err)
+      {
+         dispatch({
+            type: 'BOARDS_ERROR',
+            payload: err.response
+         });
+      }
    }
 };
 
@@ -102,23 +118,38 @@ export const setSelectedPost = (postId: number) => async (dispatch: Dispatch) =>
 
 export const getPosts = (boardId: number) => async (dispatch: Dispatch) =>
 {
+   setLoading();
+
+   let result = null;
    try
    {
-      setLoading();
-
-      const response = await axios.get(`/api/posts/${boardId}`);
+      result = JSON.parse(localStorage.getItem('state')).state.boardState.selectedBoard.posts;
 
       dispatch({
          type: 'GET_POSTS',
-         payload: response.data
+         payload: result
       });
    }
-   catch(err)
+   catch(err) { logHarmlessError(err); }
+   finally
    {
-      dispatch({
-         type: 'BOARDS_ERROR',
-         payload: err.response
-      });
+      try
+      {
+         result = await axios.get(`/api/posts/${boardId}`);
+         result = result.data;
+
+         dispatch({
+            type: 'GET_POSTS',
+            payload: result
+         });
+      }
+      catch(err)
+      {
+         dispatch({
+            type: 'BOARDS_ERROR',
+            payload: err.response.data
+         });
+      }
    }
 };
 
