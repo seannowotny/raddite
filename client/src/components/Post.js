@@ -3,16 +3,17 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, setSelectedPost } from '../actions/boardActions';
-import { setRedirect } from '../actions/redirectActions';
+import { setRedirect } from '../actions/historyActions';
+import history from '../helpers/history';
 
-function Post({ boardState: { selectedBoard }, setSelectedPost, setRedirect, postId })
+function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
 {
    let [post, setPost] = useState(null);
 
    const redirect = () =>
    {
       setSelectedPost(postId);
-      setRedirect(`/${selectedBoard.name}/${post.title}`);
+      history.push(`/${selectedBoard.name}/${post.title}`);
    }
 
    useEffect(() => 

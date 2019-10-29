@@ -4,7 +4,8 @@ import * as React from 'react';
 import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/authActions';
-import { setRedirect } from '../../actions/redirectActions';
+import { setRedirect } from '../../actions/historyActions';
+import history from '../../helpers/history';
 
 function Login({ authState: { authenticatedAs }, login, setRedirect }): React.Node 
 { 
@@ -22,7 +23,7 @@ function Login({ authState: { authenticatedAs }, login, setRedirect }): React.No
    {
       if(authenticatedAs)
       {
-         setRedirect('/');
+         history.push('/');
       }
       //eslint-disable-next-line
    })

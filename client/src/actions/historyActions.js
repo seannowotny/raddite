@@ -1,6 +1,6 @@
 // @flow
 
-export type RedirectAction = 'SET_REDIRECT' | 'SET_ADDITIVE_REDIRECT' | 'REDIRECT_ERROR';
+export type RedirectAction = 'SET_REDIRECT' | 'SET_ADDITIVE_REDIRECT' | 'REDIRECT_ERROR' | 'GET_PERSISTED_HISTORY_STATE';
 
 type Dispatch = {
    type: RedirectAction,
@@ -48,13 +48,13 @@ export const setAdditiveRedirect = (uriAddition: string) => async (dispatch: Dis
    }
 };
 
-export const goBack = (history) => async (dispatch: Dispatch) =>
+export const goBack = () => async (dispatch: Dispatch) =>
 {
    try
    {   
       dispatch({
          type: 'GO_BACK',
-         payload: history
+         payload: null
       });
    }
    catch(err)
@@ -65,3 +65,11 @@ export const goBack = (history) => async (dispatch: Dispatch) =>
       });
    }
 }
+
+export const getPersistedHistoryState = () => async (dispatch: Dispatch) =>
+{
+   dispatch({
+      type: 'GET_PERSISTED_REDIRECT_STATE',
+      payload: null
+   });
+};

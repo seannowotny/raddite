@@ -4,7 +4,8 @@ import React, { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getPosts } from '../actions/boardActions';
-import { setRedirect } from '../actions/redirectActions';
+import { setRedirect } from '../actions/historyActions';
+import history from '../helpers/history';
 
 const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { boards, selectedBoard }, children }) =>
 {
@@ -22,7 +23,7 @@ const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { bo
          }
          else
          {
-            setRedirect('/');
+            history.push('/');
          }
       }
       if(selectedBoard)

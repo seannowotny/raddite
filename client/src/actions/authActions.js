@@ -28,10 +28,10 @@ export const login = (credentials) => async (dispatch: Dispatch) =>
    }
    catch(err)
    {
-      // dispatch({
-      //    type: 'AUTH_ERROR',
-      //    payload: err.response.data
-      // });
+      dispatch({
+         type: 'AUTH_ERROR',
+         payload: err.response.data
+      });
    }
 };
 
@@ -41,4 +41,4 @@ export const getPersistedAuthState = () => async (dispatch: Dispatch) =>
       type: 'GET_PERSISTED_AUTH_STATE',
       payload: null
    });
-}
+};

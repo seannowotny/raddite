@@ -1,14 +1,15 @@
 // @flow
 
+import history from '../../helpers/history';
+
 export default class BoardStateMethods
 {
-   constructor(state: object, dispatch: any, boardRequests: any, postRequests: any, setRedirect: any)
+   constructor(state: object, dispatch: any, boardRequests: any, postRequests: any)
    {
       this.state = state;
       this.dispatch = dispatch;
       this.boardRequests = boardRequests;
       this.postRequests = postRequests;
-      this.setRedirect = setRedirect;
    }
 
    SetSelectedBoard = async (boardName: string) =>
@@ -20,7 +21,7 @@ export default class BoardStateMethods
       if(selectedBoard)
       {
          this.dispatch({ selectedBoard });
-         this.setRedirect(selectedBoard.name);
+         history.push(selectedBoard.name);
 
          if(! selectedBoard.posts)
          {
@@ -31,7 +32,7 @@ export default class BoardStateMethods
       else
       {
          this.dispatch({ selectedBoard: null });
-         this.setRedirect('');
+         history.push('/');
       }
    }
    

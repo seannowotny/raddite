@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import BoardRouter from './routers/BoardRouter';
 import PostRouter from './routers/PostRouter';
 import Home from './components/pages/Home';
@@ -12,11 +12,11 @@ import Profile from './components/pages/Profile';
 import Post from './components/pages/Post';
 import PostCreate from './components/pages/PostCreate';
 import PostEdit from './components/pages/PostEdit';
-import Redirector from './components/Redirector';
 
 import { Provider } from 'react-redux';
-import Persister from './components/Persister';
+import Hydrater from './components/Hydrater';
 import store from './store';
+import history from './helpers/history';
 
 import './App.css';
 import Navbar from './components/layout/Navbar';
@@ -25,10 +25,9 @@ import BackButton from './components/layout/buttons/BackButton';
 function App() 
 {
   return (
-  <Router>
+  <Router history={history}>
     <Provider store={store}>
-      <Persister />
-      <Redirector/>
+      <Hydrater />
       <Navbar />
       <BackButton />
       <div className="container">

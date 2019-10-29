@@ -3,7 +3,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getBoards } from '../../actions/boardActions';
-import { setRedirect } from '../../actions/redirectActions';
+import { setRedirect } from '../../actions/historyActions';
+import history from '../../helpers/history';
 
 const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect }) => 
 {
@@ -19,7 +20,7 @@ const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, se
       if(board)
       {
          setSelectedBoard(board.id);
-         setRedirect('/' + board.name);
+         history.push('/' + board.name);
       }
    }
 
