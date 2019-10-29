@@ -1,19 +1,19 @@
 // @flow
 
 import * as React from 'react';
-import { Fragment, useEffect } from 'react';
+import { Fragment/*, useEffect*/ } from 'react';
 import { connect } from 'react-redux';
 import Comments from '../containers/Comments';
 
 function Post({ boardState: { selectedBoard, selectedPost }}): React.Node
 {
-   useEffect(() =>
-   {
-      if(selectedPost && selectedPost.comments)
-      {
-         console.log(selectedPost.comments);
-      }
-   });
+   // useEffect(() =>
+   // {
+   //    if(selectedPost && selectedPost.comments)
+   //    {
+   //       console.log(selectedPost.comments);
+   //    }
+   // });
 
    return (
       <Fragment>
