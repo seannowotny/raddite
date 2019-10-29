@@ -1,7 +1,6 @@
 // @flow
 
 import axios from 'axios';
-import { logHarmlessError } from '../helpers/Logging';
 export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'SET_LOADING';
 
 type Dispatch = ({
@@ -69,6 +68,8 @@ export const addBoard = (board: any) => async (dispatch: Dispatch) =>
 
 export const setSelectedBoard = (boardId: number) => async (dispatch: Dispatch) =>
 {
+   setLoading();
+
    try
    {
       dispatch({

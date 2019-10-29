@@ -3,9 +3,8 @@
 import React, { Fragment } from 'react';
 import Post from '../Post';
 import { connect } from 'react-redux';
-import { getPosts } from '../../actions/boardActions';
 
-const Board = ({ boardState: { selectedBoard }, getPosts }) =>
+const Board = ({ boardState: { selectedBoard } }) =>
 {
    return (
       <Fragment>
@@ -22,4 +21,4 @@ const mapStateToProps = state => ({
    boardState: state.boardState
 });
 
-export default connect(mapStateToProps, { getPosts })(Board);
+export default connect(mapStateToProps)(Board);

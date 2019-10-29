@@ -7,7 +7,7 @@ import { setSelectedPost } from '../actions/boardActions';
 import { setRedirect } from '../actions/historyActions';
 import history from '../helpers/history';
 
-const PostRouter = ({ boardState: { boards, selectedBoard }, setSelectedPost, setRedirect, children }) =>
+const PostRouter = ({ boardState: { boards, selectedBoard, loading }, setSelectedPost, setRedirect, children }) =>
 {
    const { postTitle } = useParams();
 
@@ -32,7 +32,13 @@ const PostRouter = ({ boardState: { boards, selectedBoard }, setSelectedPost, se
       }
    });
 
-   return <Fragment>{children}</Fragment>;
+   return (
+      <Fragment>
+         {loading 
+         ? <Fragment></Fragment>
+         : <Fragment>{children}</Fragment>}
+      </Fragment>
+      );
 }
 
 const mapStateToProps = state => ({

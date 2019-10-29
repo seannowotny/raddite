@@ -12,7 +12,6 @@ function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
 
    const redirect = () =>
    {
-      setSelectedPost(postId);
       history.push(`/${selectedBoard.name}/${post.title}`);
    }
 

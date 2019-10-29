@@ -1,13 +1,13 @@
 // @flow
 
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getPosts } from '../actions/boardActions';
 import { setRedirect } from '../actions/historyActions';
 import history from '../helpers/history';
 
-const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { boards, selectedBoard }, children }) =>
+const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { boards, selectedBoard, loading }, children }) =>
 {
    const { boardName } = useParams();
 
@@ -30,9 +30,16 @@ const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { bo
       {
          getPosts(selectedBoard.id);
       }
-   }, [boards, boardName, setSelectedBoard, setRedirect, selectedBoard, getPosts]);
+      //eslint-disable-next-line
+   }, [boards, selectedBoard]);
 
-   return <Fragment>{children}</Fragment>;
+   return (
+   <Fragment>
+      {loading 
+      ? <Fragment></Fragment>
+      : <Fragment>{children}</Fragment>}
+   </Fragment>
+   );
 }
 
 const mapStateToProps = state => ({
