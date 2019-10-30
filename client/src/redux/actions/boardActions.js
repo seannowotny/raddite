@@ -3,7 +3,7 @@
 import axios from 'axios';
 import history from '../../helpers/history';
 
-export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'SET_LOADING';
+export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'ADD_POST' | 'SET_LOADING';
 
 type Dispatch = ({
    type: BoardAction,
@@ -124,6 +124,37 @@ export const getPosts = (boardId: number) => async (dispatch: Dispatch) =>
          type: 'GET_POSTS',
          payload: result
       });
+   }
+   catch(err)
+   {
+      dispatch({
+         type: 'BOARDS_ERROR',
+         payload: err.response.data
+      });
+   }
+};
+
+export const addPost = (post: any, token: string, selectedBoardId: Number, selectedBoardName: string) => async (dispatch: Dispatch) =>
+{
+   try
+   {
+      setLoading();
+
+      const config = {
+         headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+         }
+      };
+
+      const response = await axios.post(`/api/posts/${selectedBoardId}`, post, config);
+
+      dispatch({
+         type: 'ADD_POST',
+         payload: response.data
+      });
+
+      history.push(`/${selectedBoardName}/${post.title}`);
    }
    catch(err)
    {

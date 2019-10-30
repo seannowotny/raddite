@@ -33,10 +33,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, int $id)
     {
         $request->validate([
-            'boardId' => 'required|integer|exists:boards,id',
             'title' => 'required|regex:/(?i)(?!^edit$)(^.*$)/',
             'body' => 'required',
         ]);
@@ -44,12 +43,12 @@ class PostController extends Controller
         $user = auth()->user();
 
         $post = $user->posts()->save(factory(Post::class)->make([
-            'board_id' => $request->boardId,
+            'board_id' => $id,
             'title' => $request->title,
-            'body' => $request->title,
+            'body' => $request->body,
         ]));
 
-        return response(new PostResource($post), 200);
+        return response(new PostResource($post), 201);
     }
 
     /**

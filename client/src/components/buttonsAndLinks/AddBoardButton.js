@@ -1,10 +1,8 @@
 // @flow
 
 import * as React from 'react'
-import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addBoard } from '../../../redux/actions/boardActions';
-import history from '../../../helpers/history';
+import { addBoard } from '../../redux/actions/boardActions';
 
 function AddBoardButton ({ authState: { authenticatedAs, token }, addBoard, input }): React.Node
 {
@@ -19,9 +17,9 @@ function AddBoardButton ({ authState: { authenticatedAs, token }, addBoard, inpu
 
    return (
       <>
-         {authenticatedAs && 
+      {authenticatedAs && 
          <button className="nav-link nav-item active" onClick={handleClick}>Add</button>
-         }
+      }
       </>
    )
 }

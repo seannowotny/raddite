@@ -24,7 +24,8 @@ Route::delete('user', 'UserController@delete');
 Route::apiResource('boards', 'BoardController')->only(['index', 'store']);
 
 Route::get('posts/{id}', 'PostController@index');
-Route::apiResource('posts', 'PostController')->only(['store', 'update']);
+Route::post('posts/{id}', 'PostController@store');
+Route::apiResource('posts', 'PostController')->only(['update']);
 
 Route::get('comments/{id}', 'CommentController@index');
 Route::apiResource('comments', 'CommentController')->only(['store', 'update']);

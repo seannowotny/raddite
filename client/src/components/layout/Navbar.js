@@ -7,7 +7,7 @@ import BoardsListing from '../BoardsListing';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../../redux/actions/authActions';
-import AddBoardButton from './buttons/AddBoardButton';
+import AddBoardButton from '../buttonsAndLinks/AddBoardButton';
 
 function Navbar({ authState: { authenticatedAs }, logout, location: { pathname } })
 {

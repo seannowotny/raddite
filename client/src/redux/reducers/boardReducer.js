@@ -101,6 +101,19 @@ export default (state: any = initialState, action: Action) =>
          };
          return result;
       }
+      case 'ADD_POST':
+      {
+         let selectedBoard = state.selectedBoard;
+         
+         selectedBoard.posts.push(action.payload);
+
+         const result = {
+            ...state,
+            selectedBoard,
+            loading: false
+         };
+         return result;
+      }
       case 'SET_LOADING':
          return {
             ...state,

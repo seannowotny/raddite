@@ -10,8 +10,8 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
 import Post from './components/pages/Post';
-import PostCreate from './components/pages/PostCreate';
-import PostEdit from './components/pages/PostEdit';
+import AddPost from './components/pages/AddPost';
+import EditPost from './components/pages/EditPost';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import { Provider } from 'react-redux';
@@ -41,6 +41,9 @@ function App()
               <BoardRouter>
                 <Switch>
 
+                  <Route exact path='/:boardName/create' component={AddPost} />
+                  <Route exact path='/:boardName/:postTitle/edit' component={EditPost} />
+
                   <Route exact path='/:boardName' component={Board}/>
 
                   <Route exact path='/:boardName/:postTitle'>
@@ -48,10 +51,6 @@ function App()
                       <Post/>
                     </PostRouter>
                   </Route>
-
-                  <Route exact path='/:boardName/:postName/edit' component={PostEdit} />
-                  
-                  <Route exact path='/:boardName/create' component={PostCreate} />
 
                 </Switch>
               </BoardRouter>
