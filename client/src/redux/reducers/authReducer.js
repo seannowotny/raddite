@@ -40,6 +40,14 @@ export default (state: any = initialState, action: Action) =>
          };
          return result;
       }
+      case 'LOGOUT':
+      {
+         return {
+            ...state,
+            authenticatedAs: null,
+            token: null,
+         };
+      }
       case 'AUTH_ERROR':
       {
          return {

@@ -2,14 +2,14 @@
 
 import axios from "axios";
 
-export type AuthAction = 'LOGIN' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'SET_STATE';
+export type AuthAction = 'LOGIN' | 'LOGOUT' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'SET_STATE';
 
 type Dispatch = ({
    type: AuthAction,
    payload: any
 }) => void;
 
-export const login = (credentials) => async (dispatch: Dispatch) =>
+export const login = (credentials: any) => async (dispatch: Dispatch) =>
 {
    try
    {
@@ -34,3 +34,11 @@ export const login = (credentials) => async (dispatch: Dispatch) =>
       });
    }
 };
+
+export const logout = () => async (dispatch: Dispatch) =>
+{
+   dispatch({
+      type: 'LOGOUT',
+      payload: null
+   })
+}

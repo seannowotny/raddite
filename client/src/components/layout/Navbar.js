@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import BoardsListing from '../BoardsListing';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { logout } from '../../redux/actions/authActions';
 
-function Navbar({ authState: { authenticatedAs }, location: { pathname } })
+function Navbar({ authState: { authenticatedAs }, logout, location: { pathname } })
 {
    return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,16 +19,21 @@ function Navbar({ authState: { authenticatedAs }, location: { pathname } })
             <ul className="navbar-nav mr-auto"> 
                {pathname !== '/' &&
                   <li className="nav-item active">
-                     <Link className="nav-link" to="/">Home<span className="sr-only">(current)</span></Link>
+                     <Link className="nav-link" to="/">Home</Link>
                   </li>
                }
-               {! authenticatedAs &&
-                  <Fragment>
+               {! authenticatedAs
+               ?  <Fragment>
                      <li className="nav-item active">
-                        <Link className="nav-link" to="/login">Login<span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/login">Login</Link>
                      </li>
                      <li className="nav-item active">
-                        <Link className="nav-link" to="/register">Register<span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link" to="/register">Register</Link>
+                     </li>
+                  </Fragment>
+               :  <Fragment>
+                     <li className="nav-item active">
+                        <button className="nav-link" onClick={logout}>Logout</button>
                      </li>
                   </Fragment>
                }
@@ -42,4 +48,4 @@ const mapStateToProps = (state: any) => (
    authState: state.authState
 });
 
-export default connect(mapStateToProps)(withRouter(Navbar));
+export default connect(mapStateToProps, { logout })(withRouter(Navbar));
