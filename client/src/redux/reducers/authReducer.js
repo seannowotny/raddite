@@ -31,6 +31,15 @@ export default (state: any = initialState, action: Action) =>
             return { ...state }
          }
       }
+      case 'REGISTER':
+      {
+         const result = {
+            ...state,
+            authenticatedAs: action.payload.user,
+            token: action.payload.access_token,
+         }
+         return result;
+      }
       case 'LOGIN':
       {
          const result = {

@@ -4,10 +4,9 @@ import * as React from 'react';
 import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/authActions';
-import { setRedirect } from '../../redux/actions/historyActions';
 import history from '../../helpers/history';
 
-function Login({ authState: { authenticatedAs }, login, setRedirect }): React.Node 
+function Login({ authState: { authenticatedAs }, login }): React.Node 
 { 
    const handleSubmit = e =>
    {
@@ -19,14 +18,13 @@ function Login({ authState: { authenticatedAs }, login, setRedirect }): React.No
       });
    }
 
-   useEffect(() =>
+   useEffect(() => 
    {
       if(authenticatedAs)
       {
          history.push('/');
       }
-      //eslint-disable-next-line
-   })
+   }, [authenticatedAs]);
 
    return (
       <Fragment>
@@ -37,14 +35,17 @@ function Login({ authState: { authenticatedAs }, login, setRedirect }): React.No
                type="email"
                name="email"
                required
+               autoFocus
+               placeholder="Enter your email..."
                />
             </div>
             <div>
-               <label htmlFor="email">Password</label>
+               <label htmlFor="password">Password</label>
                <input
                type="password"
                name="password"
                required
+               placeholder="Enter your password..."
                />
             </div>
             <input type="submit" value="Login" />
@@ -56,7 +57,6 @@ function Login({ authState: { authenticatedAs }, login, setRedirect }): React.No
 const mapStateToProps = (state) => (
 {
    authState: state.authState,
-   redirectState: state.redirectState
 });
 
-export default connect(mapStateToProps, { login, setRedirect })(Login);
+export default connect(mapStateToProps, { login })(Login);
