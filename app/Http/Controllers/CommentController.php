@@ -33,23 +33,23 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
         $request->validate([
-            'postId' => 'required|integer|exists:posts,id',
             'commentId' => 'integer|exists:comments,id|nullable',
             'content' => 'required|min:3',
         ]);
 
         $user = auth()->user();
 
-        $post = Post::find($request->postId);
+        $post = Post::find($id);
         $comment = $user->comments()->save(factory(Comment::class)->make([
             'content' => $request->content,
-            'post_id' => $post->id,
+            'post_id' => $id,
+            'comment_id' => $request->commentId
         ]));
 
-        return response(new CommentResource($comment), 200);
+        return response(new CommentResource($comment), 201);
     }
 
     /**

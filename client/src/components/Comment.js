@@ -2,8 +2,10 @@
 
 import * as React from 'react';
 import { Fragment } from 'react';
+import { connect } from 'react-redux';
+import CommentField from './CommentField';
 
-function Comment({ comment }): React.Node
+function Comment({ authState, id, comment }): React.Node
 { 
    return (
       <Fragment>
@@ -12,6 +14,11 @@ function Comment({ comment }): React.Node
             {comment.replyingTo && 
             <p>replying to {comment.replyingTo.name}</p>}
             <p>{comment.content}</p>
+         </div>
+         <div>
+         {authState && authState.authenticatedAs &&
+            <CommentField commentId={id} />
+         }
          </div>
          <div className="ml-4">
             {comment.comments && 
@@ -22,4 +29,9 @@ function Comment({ comment }): React.Node
    );
 }
 
-export default Comment;
+const mapStateToProps = (state: any) => (
+{
+   authState: state.authState,
+})
+
+export default connect(mapStateToProps)(Comment);

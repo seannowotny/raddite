@@ -28,4 +28,5 @@ Route::post('posts/{id}', 'PostController@store');
 Route::apiResource('posts', 'PostController')->only(['update']);
 
 Route::get('comments/{id}', 'CommentController@index');
-Route::apiResource('comments', 'CommentController')->only(['store', 'update']);
+Route::post('comments/{id}', 'CommentController@store');
+Route::apiResource('comments', 'CommentController')->only(['update']);

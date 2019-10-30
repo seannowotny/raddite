@@ -114,6 +114,19 @@ export default (state: any = initialState, action: Action) =>
          };
          return result;
       }
+      case 'ADD_COMMENT':
+      {
+         let selectedPost = state.selectedPost;
+         
+         selectedPost.comments.push(action.payload);
+
+         const result = {
+            ...state,
+            selectedPost,
+            loading: false
+         };
+         return result;
+      }
       case 'SET_LOADING':
          return {
             ...state,

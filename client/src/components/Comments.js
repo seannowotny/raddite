@@ -3,14 +3,20 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 import Comment from './Comment';
+import { connect } from 'react-redux';
 
-function Comments({ comments }): React.Node
+function Comments({ boardState: { selectedPost } }): React.Node
 { 
    return (
       <Fragment>
-         {comments.map(comment => (<Comment key={comment.id} comment={comment}/>))}
+         {selectedPost && selectedPost.comments &&
+         selectedPost.comments.map(comment => (<Comment key={comment.id} id={comment.id} comment={comment}/>))}
       </Fragment>
    );
 }
 
-export default Comments;
+const mapStateToProps = (state: any) => ({
+   boardState: state.boardState
+});
+
+export default connect(mapStateToProps)(Comments);

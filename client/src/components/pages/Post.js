@@ -1,20 +1,13 @@
 // @flow
 
 import * as React from 'react';
-import { Fragment/*, useEffect*/ } from 'react';
+import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Comments from '../Comments';
+import CommentField from '../CommentField';
 
-function Post({ boardState: { selectedBoard, selectedPost }}): React.Node
+function Post({ boardState: { selectedBoard, selectedPost }, authState: { authenticatedAs }}): React.Node
 {
-   // useEffect(() =>
-   // {
-   //    if(selectedPost && selectedPost.comments)
-   //    {
-   //       console.log(selectedPost.comments);
-   //    }
-   // });
-
    return (
       <Fragment>
          <div>
@@ -27,15 +20,23 @@ function Post({ boardState: { selectedBoard, selectedPost }}): React.Node
             :  <h1>Loading Post...</h1>
             }
          </div>
-         {(selectedPost && selectedPost.comments) &&
-         <Comments comments={selectedPost.comments}/>
+         {selectedPost &&
+            <Fragment>
+            {authenticatedAs &&
+               <CommentField/>
+            }
+            {selectedPost.comments &&
+               <Comments comments={selectedPost.comments}/>
+            }
+            </Fragment>
          }
       </Fragment>
    );
 }
 
 const mapStateToProps = state => ({
-   boardState: state.boardState
+   boardState: state.boardState,
+   authState: state.authState,
 });
 
 export default connect(mapStateToProps)(Post);
