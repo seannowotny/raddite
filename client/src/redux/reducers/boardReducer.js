@@ -50,9 +50,11 @@ export default (state: any = initialState, action: Action) =>
       }
       case 'ADD_BOARD':
       {
+         let boards = state.boards;
+         boards.push(action.payload);
          const result = {
             ...state,
-            boards: action.payload,
+            boards,
             loading: false
          };
          return result;

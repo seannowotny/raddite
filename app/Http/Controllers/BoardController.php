@@ -43,10 +43,10 @@ class BoardController extends Controller
 
         $user = auth()->user();
 
-        $user->boards()->save(factory(Board::class)->make([
+        $user = $user->boards()->save(factory(Board::class)->make([
             'name' => $request->name,
         ]));
 
-        return response(['message' => 'Board saved'], 201);
+        return response(new BoardResource($user), 201);
     }
 }

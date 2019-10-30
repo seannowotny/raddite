@@ -1,6 +1,8 @@
 // @flow
 
 import axios from 'axios';
+import history from '../../helpers/history';
+
 export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'SET_LOADING';
 
 type Dispatch = ({
@@ -38,7 +40,7 @@ export const getBoards = () => async (dispatch: Dispatch) =>
    }
 };
 
-export const addBoard = (board: any) => async (dispatch: Dispatch) =>
+export const addBoard = (board: any, token: string) => async (dispatch: Dispatch) =>
 {
    try
    {
@@ -46,7 +48,8 @@ export const addBoard = (board: any) => async (dispatch: Dispatch) =>
 
       const config = {
          headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
          }
       };
 
@@ -56,6 +59,8 @@ export const addBoard = (board: any) => async (dispatch: Dispatch) =>
          type: 'ADD_BOARD',
          payload: response.data
       });
+
+      history.push('/' + board.name);
    }
    catch(err)
    {

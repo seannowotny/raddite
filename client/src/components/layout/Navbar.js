@@ -1,19 +1,23 @@
 // @flow
 
 import * as React from 'react';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import BoardsListing from '../BoardsListing';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../../redux/actions/authActions';
+import AddBoardButton from './buttons/AddBoardButton';
 
 function Navbar({ authState: { authenticatedAs }, logout, location: { pathname } })
 {
+   const [input, setInput] = useState('');
+
    return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="navbar-brand">BoardsListing</div>
-      <BoardsListing/>
+      <BoardsListing input={input} setInput={setInput}/>
+      <AddBoardButton input={input}/>
       <div className="navbar-brand ml-2 container">{authenticatedAs ? `Welcome ${authenticatedAs.name}` : "Welcome To The Wonderfully Marvelous Halls Of Raddite"}</div>
          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto"> 

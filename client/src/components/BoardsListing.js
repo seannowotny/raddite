@@ -1,19 +1,19 @@
 // @flow
 
-import React, { Fragment, useState, useEffect } from 'react';
+import * as React from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getBoards } from '../redux/actions/boardActions';
 import { setRedirect } from '../redux/actions/historyActions';
 import history from '../helpers/history';
 
-const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect }) => 
+const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect, input, setInput }): React.Node => 
 {
-   const [boardInput, setBoardInput] = useState('');
-
    const handleInputChange = (event: any) =>
    {
       const value = event.target.value;
-      setBoardInput(value);
+      setInput(value);
+      setInput(value);
 
       const board = boards.find(board => board.name.toLowerCase() === value.toLowerCase());
 
@@ -34,12 +34,14 @@ const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, se
 
    return (
       <Fragment>
-         <input value={boardInput} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
+         <input value={input} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
          <datalist id="boardDatalist">
-            {boards
-            ?  boards.map(board => (
-                  <option key={board.id} value={board.name}></option>)
-            ): <Fragment/>}
+            <Fragment>
+            {boards &&
+               boards.map(board => (
+                  <option key={board.id} value={board.name}></option>))
+            }
+            </Fragment>
          </datalist>
       </Fragment>
    );
