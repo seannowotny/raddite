@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Fragment/*, useEffect*/ } from 'react';
 import { connect } from 'react-redux';
-import Comments from '../containers/Comments';
+import Comments from '../Comments';
 
 function Post({ boardState: { selectedBoard, selectedPost }}): React.Node
 {

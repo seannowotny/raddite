@@ -1,22 +1,14 @@
 // @flow
 
 import * as React from 'react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import BoardsListing from '../boards/BoardsListing';
+import BoardsListing from '../BoardsListing';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 function Navbar({ authState: { authenticatedAs }, location: { pathname } })
 {
-   // const [location, setLocation] = useState();
-
-   // useEffect(() =>
-   // {
-   //    // setLocation(createBrowserHistory().location.pathname);
-   //    console.log(history);
-   // })
-
    return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="navbar-brand">BoardsListing</div>

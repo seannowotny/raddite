@@ -2,9 +2,9 @@
 
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setSelectedBoard, getBoards } from '../../actions/boardActions';
-import { setRedirect } from '../../actions/historyActions';
-import history from '../../helpers/history';
+import { setSelectedBoard, getBoards } from '../redux/actions/boardActions';
+import { setRedirect } from '../redux/actions/historyActions';
+import history from '../helpers/history';
 
 const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect }) => 
 {

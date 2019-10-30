@@ -2,8 +2,8 @@
 
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { setSelectedBoard, setSelectedPost } from '../actions/boardActions';
-import { setRedirect } from '../actions/historyActions';
+import { setSelectedBoard, setSelectedPost } from '../redux/actions/boardActions';
+import { setRedirect } from '../redux/actions/historyActions';
 import history from '../helpers/history';
 
 function Post({ boardState: { selectedBoard }, setSelectedPost, postId })

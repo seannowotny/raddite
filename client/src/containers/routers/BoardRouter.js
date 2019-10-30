@@ -3,9 +3,9 @@
 import React, { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setSelectedBoard, getPosts } from '../actions/boardActions';
-import { setRedirect } from '../actions/historyActions';
-import history from '../helpers/history';
+import { setSelectedBoard, getPosts } from '../../redux/actions/boardActions';
+import { setRedirect } from '../../redux/actions/historyActions';
+import history from '../../helpers/history';
 
 const BoardRouter = ({ setSelectedBoard, setRedirect, getPosts, boardState: { boards, selectedBoard, loading }, children }) =>
 {

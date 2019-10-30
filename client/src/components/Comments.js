@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Fragment } from 'react';
-import Comment from '../Comment';
+import Comment from './Comment';
 
 function Comments({ comments }): React.Node
 { 
