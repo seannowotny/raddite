@@ -21,7 +21,7 @@ function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
       {
          setPost(selectedBoard.posts.find(post => post.id === postId));
       }
-   }, [selectedBoard, postId])
+   });
 
    return (
       <Fragment>

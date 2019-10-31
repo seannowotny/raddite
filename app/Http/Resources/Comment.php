@@ -25,6 +25,7 @@ class Comment extends JsonResource
             'updatedAt' => $this->updated_at->diffForHumans(),
             'createdAt' => $this->created_at->diffForHumans(),
             'replyingTo' => (new UserResource(User::find($this->comment['user_id']))),
+            'commentId' => $this->comment_id,
             'comments' => CommentResource::collection($this->comments),
         ];
     }

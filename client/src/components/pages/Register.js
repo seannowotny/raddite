@@ -31,7 +31,7 @@ function Register({ authState: { authenticatedAs }, register, setError }): React
    {
       if(authenticatedAs)
       {
-         history.push('/');
+         history.goBack();
       }
    }, [authenticatedAs]);
 

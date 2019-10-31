@@ -116,9 +116,21 @@ export default (state: any = initialState, action: Action) =>
       }
       case 'ADD_COMMENT':
       {
-         let selectedPost = state.selectedPost;
+         const commentToBeAdded = action.payload;
+         console.log(commentToBeAdded);
+
+         const selectedPost = state.selectedPost;
          
-         selectedPost.comments.push(action.payload);
+         if(commentToBeAdded.commentId)
+         {
+            let commentBeingRepliedTo = customFilter(selectedPost, commentToBeAdded.commentId);
+            console.log(commentBeingRepliedTo);
+            commentBeingRepliedTo.comments.push(commentToBeAdded);
+         }
+         else
+         {
+            selectedPost.comments.push(commentToBeAdded);
+         }
 
          const result = {
             ...state,
@@ -147,4 +159,28 @@ const updateSelected = (state: any) =>
    const selectedPost = state.selectedPost && selectedBoard.posts.find(post => post.id === state.selectedPost.id);
 
    return { selectedBoard, selectedPost };
+};
+
+function customFilter(object: any, id: number)
+{
+   let result = null;
+
+   if(object['content'] && object['id'] == id)
+       return object;
+
+   if(object['comments'])
+   {
+      const comments = object['comments'];
+
+      for (let i = 0; i < comments.length; i++) 
+      {
+         const comment = comments[i];
+         // console.log(comment, id);
+
+         result = customFilter(comment, id);
+
+         if(result)
+            return result;
+      }
+   }
 }

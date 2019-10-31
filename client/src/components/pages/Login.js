@@ -22,7 +22,7 @@ function Login({ authState: { authenticatedAs }, login }): React.Node
    {
       if(authenticatedAs)
       {
-         history.push('/');
+         history.goBack();
       }
    }, [authenticatedAs]);
 

@@ -167,8 +167,8 @@ export const addPost = (post: any, token: string, selectedBoardId: number, selec
 
 export const addComment = (comment: any, token: String, selectedPostId: number) => async (dispatch: Dispatch) =>
 {
-   try
-   {
+   // try
+   // {
       setLoading();
 
       const config = {
@@ -184,14 +184,14 @@ export const addComment = (comment: any, token: String, selectedPostId: number) 
          type: 'ADD_COMMENT',
          payload: response.data
       });
-   }
-   catch(err)
-   {
-      dispatch({
-         type: 'BOARDS_ERROR',
-         payload: err.response.data
-      });
-   }
+   // }
+   // catch(err)
+   // {
+   //    dispatch({
+   //       type: 'BOARDS_ERROR',
+   //       payload: err.response.data
+   //    });
+   // }
 };
 
 // export const getComments = (postId: number) => async (dispatch: Dispatch) =>

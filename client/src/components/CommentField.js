@@ -22,17 +22,14 @@ function CommentField({ addComment, boardState: { selectedPost }, authState: { t
 
       const content = e.target.content.value;
 
-      console.log(commentId);
-      console.log(token);
+      const comment = { 
+         commentId, 
+         content 
+      };
 
-      if(commentId)
-      {
-         addComment({ commentId, content }, token, selectedPost.id);
-      }
-      else
-      {
-         addComment({ content }, token, selectedPost.id);
-      }
+      console.log(comment);
+
+      addComment(comment, token, selectedPost.id);
 
       setIsSelected(!isSelected);
    };
