@@ -60,7 +60,8 @@ export default (state: any = initialState, action: Action) =>
          return result;
       }
       case 'SET_SELECTED_BOARD':
-         {
+      {
+         console.log(action.payload);
          return {
             ...state,
             selectedBoard: state.boards.find(board => board.id === action.payload),

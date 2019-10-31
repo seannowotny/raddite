@@ -2,17 +2,21 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux';
-import { addBoard } from '../../redux/actions/boardActions';
+import { addBoard, setSelectedBoard } from '../../redux/actions/boardActions';
+import history from '../../helpers/history';
 
-function AddBoardButton ({ authState: { authenticatedAs, token }, addBoard, input }): React.Node
+function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input }): React.Node
 {
-   const handleClick = e =>
+   const handleClick = async e =>
    {
       e.preventDefault();
 
-      addBoard({
+      await addBoard({
          name: input
       }, token);
+      console.log(boards.length);
+      await setSelectedBoard(boards.length + 1);
+      history.push('/' + input);
    }
 
    return (
@@ -30,4 +34,4 @@ const mapStateToProps = (state: any) => (
    boardState: state.boardState,
 })
 
-export default connect(mapStateToProps, { addBoard })(AddBoardButton)
+export default connect(mapStateToProps, { addBoard, setSelectedBoard })(AddBoardButton)

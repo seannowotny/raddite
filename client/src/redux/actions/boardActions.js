@@ -58,9 +58,7 @@ export const addBoard = (board: any, token: string) => async (dispatch: Dispatch
       dispatch({
          type: 'ADD_BOARD',
          payload: response.data
-      });
-
-      history.push('/' + board.name);
+      });    
    }
    catch(err)
    {
