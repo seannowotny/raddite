@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, getBoards } from '../redux/actions/boardActions';
 import { setRedirect } from '../redux/actions/historyActions';

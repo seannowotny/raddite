@@ -14,7 +14,7 @@ function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { 
       await addBoard({
          name: input
       }, token);
-      console.log(boards.length);
+      // console.log(boards.length);
       await setSelectedBoard(boards.length + 1);
       history.push('/' + input);
    }

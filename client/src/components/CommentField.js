@@ -27,7 +27,7 @@ function CommentField({ addComment, boardState: { selectedPost }, authState: { t
          content 
       };
 
-      console.log(comment);
+      // console.log(comment);
 
       addComment(comment, token, selectedPost.id);
 
