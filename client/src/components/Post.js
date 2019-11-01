@@ -25,13 +25,12 @@ function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
 
    return (
       <Fragment>
-         <h1>Post {postId}</h1>
          {post 
          ?  <Fragment>
-               <div className="text-center">
-                  <button className="btn btn-secondary mb-2" onClick={redirect}><h3>{post.title}</h3></button>
+               <div className="card card-body mb-5">
+                  <button className="btn btn-link mb-2 card-title" onClick={redirect}><h3>{post.title}</h3></button>
+                  <p className="card-text">{post.body}</p>
                </div>
-               <p>{post.body}</p>
             </Fragment>
          :  <h1>Loading Post...</h1>}
       </Fragment>

@@ -9,11 +9,10 @@ const Board = ({ authState: { authenticatedAs }, boardState: { selectedBoard } }
 {
    return (
       <Fragment>
-         <h1>Board</h1>
+         <h1 className="display-5 text-center mb-4">{selectedBoard && selectedBoard.name}</h1>
          {authenticatedAs && 
             <AddPostLink />
          }
-         <h1>{selectedBoard && selectedBoard.name}</h1>
          <Fragment>
             {selectedBoard && selectedBoard.posts ? selectedBoard.posts.map(post => <Post key={post.id} postId={post.id} />) : <h1>Loading Board...</h1>}
          </Fragment>

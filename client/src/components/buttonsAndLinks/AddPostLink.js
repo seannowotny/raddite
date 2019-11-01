@@ -9,7 +9,9 @@ function AddBoardButton ({ boardState: { selectedBoard }}): React.Node
    return (
       <>
       {selectedBoard && selectedBoard.name &&
-         <Link className="nav-link" to={`/${selectedBoard.name}/create`}>Add Post</Link>
+      <div className="text-center">
+         <Link className="nav-link mb-3 text-primary" to={`/${selectedBoard.name}/create`}><h5>Add Post</h5></Link>
+      </div>
       }
       </>
    )

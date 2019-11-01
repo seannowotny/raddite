@@ -4,17 +4,8 @@ import React from 'react';
 
 const Home = (props: any) =>
 {
-   // const { fetchPosts } = useContext(selectedBoardContext); // OVER HERE
-
-   // useEffect(() => {
-   //    if(boards.length === 0)
-   //    {
-   //       fetchPosts();
-   //    }
-   // }, []);
-
    return (
-      <h1>Home</h1>
+      <h1 className="text-center">This is the Home Page Placeholder...</h1>
    );
 }
 

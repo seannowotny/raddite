@@ -1,3 +1,8 @@
 .no-underline {
     text-decoration: none !important;
 }
+
+.container-md {
+    margin: auto;
+    width: 50%;
+}
