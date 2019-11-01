@@ -36,7 +36,7 @@ const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, se
    return (
       <Fragment>
          <input value={input} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}
-         className="input-field mt-2 mr-2"/>
+         className="input-field mt-2 mr-2" autoFocus/>
          <datalist id="boardDatalist">
             <Fragment>
             {boards &&

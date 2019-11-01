@@ -14,38 +14,6 @@ function Navbar({ boardState: { selectedBoard },authState: { authenticatedAs }, 
    const [input, setInput] = useState('');
 
    return (
-      // // <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      // // <div className="container">
-      // //    <BoardsListing input={input} setInput={setInput}/>
-      // //    {authenticatedAs && (! selectedBoard || input.toLowerCase() !== selectedBoard.name.toLowerCase()) && input.length > 2 && input.length < 21 &&
-      // //       <AddBoardButton input={input}/> 
-      // //    }
-      // //    {/* <button className="btn btn-link no-underline">Add</button> */}
-      // //    <div className="navbar-brand container center">{authenticatedAs ? `Welcome ${authenticatedAs.name}` : "Welcome To Raddite"}</div>
-      // //       <ul className="navbar-nav mr-auto"> 
-      // //          {pathname !== '/' &&
-      // //             <li className="nav-item active">
-      // //                <Link className="nav-link no-underline" to="/">Home</Link>
-      // //             </li>
-      // //          }
-      // //          {! authenticatedAs
-      // //          ?  <Fragment>
-      // //                <li className="nav-item active">
-      // //                   <Link className="nav-link no-underline" to="/login">Login</Link>
-      // //                </li>
-      // //                <li className="nav-item active">
-      // //                   <Link className="nav-link no-underline" to="/register">Register</Link>
-      // //                </li>
-      // //             </Fragment>
-      // //          :  <Fragment>
-      // //                <li className="nav-item active">
-      // //                   <button type="button" className="btn btn-link text-dark no-underline" onClick={logout}>Logout</button>
-      // //                </li>
-      // //             </Fragment>
-      // //          }
-      // //       </ul>
-      // //    </div>
-      // // </nav>
       <nav role="navigation" className="navbar navbar-default navbar-fixed-top navbar-light bg-light">
          <div className="container">
             <div className="pull-left">         

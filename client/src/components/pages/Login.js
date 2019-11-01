@@ -28,10 +28,10 @@ function Login({ authState: { authenticatedAs }, login }): React.Node
 
    return (
       <Fragment>
-         <form onSubmit={handleSubmit}>
+         <form className="form-group" onSubmit={handleSubmit}>
             <div>
-               <label htmlFor="email">Email</label>
-               <input
+               <label htmlFor="email" className="mt-3">Email</label>
+               <input className="form-control"
                type="email"
                name="email"
                required
@@ -40,15 +40,15 @@ function Login({ authState: { authenticatedAs }, login }): React.Node
                />
             </div>
             <div>
-               <label htmlFor="password">Password</label>
-               <input
+               <label htmlFor="password" className="mt-3">Password</label>
+               <input className="form-control"
                type="password"
                name="password"
                required
                placeholder="Enter your password..."
                />
             </div>
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login" className="btn btn-info mt-3" />
          </form>
       </Fragment>
    )

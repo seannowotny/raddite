@@ -37,10 +37,10 @@ function Register({ authState: { authenticatedAs }, register, setError }): React
 
    return (
       <Fragment>
-         <form onSubmit={handleSubmit}>
+         <form className="form-group" onSubmit={handleSubmit}>
             <div>
-               <label htmlFor="name">Email</label>
-               <input
+               <label htmlFor="name" className="mt-3">Email</label>
+               <input className="form-control"
                type="text"
                name="name"
                required
@@ -50,17 +50,8 @@ function Register({ authState: { authenticatedAs }, register, setError }): React
                />
             </div>
             <div>
-               <label htmlFor="email">Email</label>
-               <input
-               type="email"
-               name="email"
-               required
-               placeholder="Enter your email..."
-               />
-            </div>
-            <div>
-               <label htmlFor="password">Password</label>
-               <input
+               <label htmlFor="password" className="mt-3">Password</label>
+               <input className="form-control"
                type="password"
                name="password"
                required
@@ -69,8 +60,8 @@ function Register({ authState: { authenticatedAs }, register, setError }): React
                />
             </div>
             <div>
-               <label htmlFor="password_confirmation">Confirm Password</label>
-               <input
+               <label htmlFor="password_confirmation" className="mt-3">Confirm Password</label>
+               <input className="form-control"
                type="password"
                name="password_confirmation"
                required
@@ -78,7 +69,7 @@ function Register({ authState: { authenticatedAs }, register, setError }): React
                placeholder="Confirm your password..."
                />
             </div>
-            <input type="submit" value="Register" />
+            <input type="submit" value="Register" className="btn btn-info mt-3"/>
          </form>
       </Fragment>
    )
