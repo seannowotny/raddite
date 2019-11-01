@@ -4,6 +4,7 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { addBoard, setSelectedBoard } from '../../redux/actions/boardActions';
 import history from '../../helpers/history';
+import '../../App.css';
 
 function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input }): React.Node
 {
@@ -20,11 +21,7 @@ function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { 
    }
 
    return (
-      <>
-      {authenticatedAs && 
-         <button className="nav-link nav-item active" onClick={handleClick}>Add</button>
-      }
-      </>
+      <button type="button" className="btn btn-primary btn-sm mb-2 mr-3" onClick={handleClick}>Add</button>
    )
 }
 

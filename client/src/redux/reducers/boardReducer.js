@@ -61,7 +61,7 @@ export default (state: any = initialState, action: Action) =>
       }
       case 'SET_SELECTED_BOARD':
       {
-         console.log(action.payload);
+         // console.log(action.payload);
          return {
             ...state,
             selectedBoard: state.boards.find(board => board.id === action.payload),
@@ -118,14 +118,14 @@ export default (state: any = initialState, action: Action) =>
       case 'ADD_COMMENT':
       {
          const commentToBeAdded = action.payload;
-         console.log(commentToBeAdded);
+         // console.log(commentToBeAdded);
 
          const selectedPost = state.selectedPost;
          
          if(commentToBeAdded.commentId)
          {
             let commentBeingRepliedTo = customFilter(selectedPost, commentToBeAdded.commentId);
-            console.log(commentBeingRepliedTo);
+            // console.log(commentBeingRepliedTo);
             commentBeingRepliedTo.comments.push(commentToBeAdded);
          }
          else

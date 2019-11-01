@@ -29,7 +29,7 @@ function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
          {post 
          ?  <Fragment>
                <div className="text-center">
-                  <button className="btn btn-secondary mt-3 mb-2" onClick={redirect}><h3>{post.title}</h3></button>
+                  <button className="btn btn-secondary mb-2" onClick={redirect}><h3>{post.title}</h3></button>
                </div>
                <p>{post.body}</p>
             </Fragment>

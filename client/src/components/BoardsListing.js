@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setSelectedBoard, getBoards } from '../redux/actions/boardActions';
 import { setRedirect } from '../redux/actions/historyActions';
 import history from '../helpers/history';
+import './BoardsListing.css';
 
 const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect, input, setInput }): React.Node => 
 {
@@ -34,7 +35,8 @@ const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, se
 
    return (
       <Fragment>
-         <input value={input} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}/>
+         <input value={input} type="text" id="boardInput" list="boardDatalist" onChange={handleInputChange}
+         className="input-field mt-2 mr-2"/>
          <datalist id="boardDatalist">
             <Fragment>
             {boards &&

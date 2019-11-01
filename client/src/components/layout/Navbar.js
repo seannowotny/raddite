@@ -9,38 +9,68 @@ import { withRouter } from 'react-router-dom';
 import { logout } from '../../redux/actions/authActions';
 import AddBoardButton from '../buttonsAndLinks/AddBoardButton';
 
-function Navbar({ authState: { authenticatedAs }, logout, location: { pathname } })
+function Navbar({ boardState: { selectedBoard },authState: { authenticatedAs }, logout, location: { pathname } })
 {
    const [input, setInput] = useState('');
 
    return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="navbar-brand">BoardsListing</div>
-      <BoardsListing input={input} setInput={setInput}/>
-      <AddBoardButton input={input}/>
-      <div className="navbar-brand ml-2 container">{authenticatedAs ? `Welcome ${authenticatedAs.name}` : "Welcome To The Wonderfully Marvelous Halls Of Raddite"}</div>
-         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto"> 
+      // // <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      // // <div className="container">
+      // //    <BoardsListing input={input} setInput={setInput}/>
+      // //    {authenticatedAs && (! selectedBoard || input.toLowerCase() !== selectedBoard.name.toLowerCase()) && input.length > 2 && input.length < 21 &&
+      // //       <AddBoardButton input={input}/> 
+      // //    }
+      // //    {/* <button className="btn btn-link no-underline">Add</button> */}
+      // //    <div className="navbar-brand container center">{authenticatedAs ? `Welcome ${authenticatedAs.name}` : "Welcome To Raddite"}</div>
+      // //       <ul className="navbar-nav mr-auto"> 
+      // //          {pathname !== '/' &&
+      // //             <li className="nav-item active">
+      // //                <Link className="nav-link no-underline" to="/">Home</Link>
+      // //             </li>
+      // //          }
+      // //          {! authenticatedAs
+      // //          ?  <Fragment>
+      // //                <li className="nav-item active">
+      // //                   <Link className="nav-link no-underline" to="/login">Login</Link>
+      // //                </li>
+      // //                <li className="nav-item active">
+      // //                   <Link className="nav-link no-underline" to="/register">Register</Link>
+      // //                </li>
+      // //             </Fragment>
+      // //          :  <Fragment>
+      // //                <li className="nav-item active">
+      // //                   <button type="button" className="btn btn-link text-dark no-underline" onClick={logout}>Logout</button>
+      // //                </li>
+      // //             </Fragment>
+      // //          }
+      // //       </ul>
+      // //    </div>
+      // // </nav>
+      <nav role="navigation" className="navbar navbar-default navbar-fixed-top navbar-light bg-light">
+         <div className="container">
+            <div className="pull-left">         
+                  <BoardsListing input={input} setInput={setInput}/>      
+               {authenticatedAs && (! selectedBoard || input.toLowerCase() !== selectedBoard.name.toLowerCase()) && input.length > 2 && input.length < 21
+               ?  <AddBoardButton input={input}/> 
+               :  <div className="btn btn-link btn-sm mb-2 mr-3 text-light">Add</div>
+               }        
+            </div>
+            <ul className="nav pull-right">
+               <li className="navbar-brand pull-left">{authenticatedAs ? `Welcome ${authenticatedAs.name}` : "Welcome To Raddite"}</li>
+               <li className="nav pull-right">
                {pathname !== '/' &&
-                  <li className="nav-item active">
-                     <Link className="nav-link" to="/">Home</Link>
-                  </li>
+                     <Link className="nav-link no-underline" to="/">Home</Link>
                }
                {! authenticatedAs
                ?  <Fragment>
-                     <li className="nav-item active">
-                        <Link className="nav-link" to="/login">Login</Link>
-                     </li>
-                     <li className="nav-item active">
-                        <Link className="nav-link" to="/register">Register</Link>
-                     </li>
+                        <Link className="nav-link no-underline" to="/login">Login</Link>
+                        <Link className="nav-link no-underline" to="/register">Register</Link>
                   </Fragment>
                :  <Fragment>
-                     <li className="nav-item active">
-                        <button className="nav-link" onClick={logout}>Logout</button>
-                     </li>
+                        <button type="button" className="btn btn-link text-dark no-underline" onClick={logout}>Logout</button>
                   </Fragment>
                }
+               </li>
             </ul>
          </div>
       </nav>
@@ -49,7 +79,8 @@ function Navbar({ authState: { authenticatedAs }, logout, location: { pathname }
 
 const mapStateToProps = (state: any) => (
 {
-   authState: state.authState
+   authState: state.authState,
+   boardState: state.boardState,
 });
 
 export default connect(mapStateToProps, { logout })(withRouter(Navbar));
