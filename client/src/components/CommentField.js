@@ -41,7 +41,7 @@ function CommentField({ addComment, boardState: { selectedPost }, authState: { t
          </Fragment>
          <Fragment>
          {isSelected &&
-            <form className="form-group mt-3" onSubmit={handleSubmit}>
+            <form className="form-group mt-3" onSubmit={handleSubmit} autoComplete="off">
                <div>
                   <input className="form-control"
                   type="text"

@@ -18,10 +18,10 @@ function AddPost({ boardState: { selectedBoard }, addPost, authState: { token } 
 
    return (
       <>
-         <form onSubmit={handleSubmit}>
+         <form onSubmit={handleSubmit} className="form-group" autoComplete="off">
             <div>
                <label htmlFor="title">Title</label>
-               <input
+               <input className="form-control"
                type="text"
                name="title"
                required
@@ -32,7 +32,7 @@ function AddPost({ boardState: { selectedBoard }, addPost, authState: { token } 
             </div>
             <div>
                <label htmlFor="password">Body</label>
-               <textarea
+               <textarea className="form-control"
                type="text"
                name="body"
                required
@@ -40,7 +40,7 @@ function AddPost({ boardState: { selectedBoard }, addPost, authState: { token } 
                placeholder="Enter body..."
                />
             </div>
-            <input type="submit" value="Add Post" />
+            <input type="submit" value="Add Post" className="btn btn-info mt-3" />
          </form>
       </>
    );

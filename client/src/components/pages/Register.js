@@ -39,14 +39,24 @@ function Register({ authState: { authenticatedAs }, register, setError }): React
       <Fragment>
          <form className="form-group" onSubmit={handleSubmit}>
             <div>
-               <label htmlFor="name" className="mt-3">Email</label>
+               <label htmlFor="name" className="mt-3">Name</label>
                <input className="form-control"
-               type="text"
+               type="name"
                name="name"
                required
                autoFocus
-               minLength={3}
                placeholder="Enter your name..."
+               minLength={3}
+               />
+            </div>
+            <div>
+               <label htmlFor="email" className="mt-3">Email</label>
+               <input className="form-control"
+               type="email"
+               name="email"
+               required
+               autoFocus
+               placeholder="Enter your email..."
                />
             </div>
             <div>
