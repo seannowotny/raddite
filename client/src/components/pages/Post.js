@@ -10,21 +10,24 @@ function Post({ boardState: { selectedBoard, selectedPost }, authState: { authen
 {
    return (
       <Fragment>
-         <div>
-            <h1>Post</h1>
-            {selectedPost 
-            ?  <Fragment>
-               <h1>{selectedPost.title}</h1>
-               <p>{selectedPost.body}</p>
-               </Fragment>
-            :  <h1>Loading Post...</h1>
-            }
-         </div>
+         <div className="card card-body mb-4">
+         {selectedPost 
+         ?  <Fragment>
+            <h1 className="card-title display-5 text-center text-info">{selectedPost.title}</h1>
+            <p className="card-text">{selectedPost.body}</p>
+            </Fragment>
+         :  <h1>Loading Post...</h1>
+         }
          {selectedPost &&
             <Fragment>
             {authenticatedAs &&
                <CommentField/>
             }
+            </Fragment>
+         }
+         </div>
+         {selectedPost &&
+            <Fragment>
             {selectedPost.comments &&
                <Comments comments={selectedPost.comments}/>
             }

@@ -37,20 +37,21 @@ function CommentField({ addComment, boardState: { selectedPost }, authState: { t
    return (
       <>
          <Fragment>
-            <button onClick={handleSelection}>Comment</button>
+            <button onClick={handleSelection} className="btn btn-link btn-sm no-underline ml-0 pl-0 mt-0 pt-0 text-primary text-left">comment</button>
          </Fragment>
          <Fragment>
          {isSelected &&
-            <form onSubmit={handleSubmit}>
+            <form className="form-group mt-3" onSubmit={handleSubmit}>
                <div>
-                  <input
+                  <input className="form-control"
                   type="text"
                   name="content"
                   required
+                  autoFocus
                   placeholder="Enter a Comment..."
                   />
                </div>
-               <input type="submit" value="Post Comment" />
+               <input type="submit" value="Post Comment" className="btn btn-info mt-3" />
             </form>
          }
          </Fragment>

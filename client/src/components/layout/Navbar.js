@@ -35,7 +35,7 @@ function Navbar({ boardState: { selectedBoard },authState: { authenticatedAs }, 
                         <Link className="nav-link no-underline" to="/register">Register</Link>
                   </Fragment>
                :  <Fragment>
-                        <button type="button" className="btn btn-link text-dark no-underline" onClick={logout}>Logout</button>
+                        <button type="button" className="btn btn-link no-underline" onClick={logout}>Logout</button>
                   </Fragment>
                }
                </li>

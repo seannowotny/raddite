@@ -8,14 +8,17 @@ function Comment({ id, comment }): React.Node
 { 
    return (
       <Fragment>
-         <div>
-            <h5>{comment.user.name}</h5>
-            {comment.replyingTo && 
-            <p>replying to {comment.replyingTo.name}</p>}
-            <p>{comment.content}</p>
-         </div>
-         <div>
-            <CommentField commentId={id} />
+         <div className="card card-body mb-4">
+            <div>
+               {comment.replyingTo 
+            ?  <h6 className="card-title">Comment by <strong>{comment.user.name}</strong> replying to {comment.replyingTo.name}</h6>
+            :  <h6 className="card-title">Comment by <strong>{comment.user.name}</strong></h6>
+               }
+               <p className="card-text">{comment.content}</p>
+            </div>
+            <div>
+               <CommentField commentId={id} />
+            </div>
          </div>
          <div className="ml-4">
             {comment.comments && 
