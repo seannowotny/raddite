@@ -36,6 +36,7 @@ function Login({ authState: { authenticatedAs }, login }): React.Node
                name="email"
                required
                autoFocus
+               email
                placeholder="Enter your email..."
                />
             </div>
@@ -45,6 +46,7 @@ function Login({ authState: { authenticatedAs }, login }): React.Node
                type="password"
                name="password"
                required
+               minLength={8}
                placeholder="Enter your password..."
                />
             </div>
