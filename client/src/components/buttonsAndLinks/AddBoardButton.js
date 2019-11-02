@@ -3,10 +3,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux';
 import { addBoard, setSelectedBoard } from '../../redux/actions/boardActions';
-import history from '../../helpers/history';
+// import history from '../../helpers/history';
+import { withRouter } from 'react-router';
 import '../../App.css';
 
-function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input }): React.Node
+function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input, history, location }): React.Node
 {
    const handleClick = async e =>
    {
@@ -17,7 +18,12 @@ function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { 
       }, token);
       // console.log(boards.length);
       await setSelectedBoard(boards.length + 1);
+      // console.log(history);
       history.push('/' + input);
+      if(location.pathname !== '/')
+      {
+         window.location.reload();
+      }
    }
 
    return (
@@ -31,4 +37,4 @@ const mapStateToProps = (state: any) => (
    boardState: state.boardState,
 })
 
-export default connect(mapStateToProps, { addBoard, setSelectedBoard })(AddBoardButton)
+export default connect(mapStateToProps, { addBoard, setSelectedBoard })(withRouter(AddBoardButton));
