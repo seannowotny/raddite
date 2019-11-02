@@ -219,3 +219,12 @@ export const addComment = (comment: any, token: String, selectedPostId: number) 
 //       });
 //    }
 // }
+
+
+export const clearBoardErrors = () => async (dispatch: Dispatch) =>
+{
+   dispatch({
+      type: 'CLEAR_ERRORS',
+      payload: null
+   })
+}

@@ -64,6 +64,13 @@ export default (state: any = initialState, action: Action) =>
             authErrors: action.payload.errors
          };
       }
+      case 'CLEAR_ERRORS':
+      {
+         return {
+            ...state,
+            authErrors: null,
+         }
+      }
       default:
          return {
             ...state

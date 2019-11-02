@@ -84,7 +84,7 @@ export default (state: any = initialState, action: Action) =>
          {
             result = {
                ...state,
-               boardErrors: "SELECTED_BOARD HASN'T BEEN SET, ABORTING"
+               boardErrors: "Something went wrong"
             };
          }
 
@@ -145,6 +145,13 @@ export default (state: any = initialState, action: Action) =>
             ...state,
             loading: true
          };
+      case 'CLEAR_ERRORS':
+      {
+         return {
+            ...state,
+            boardErrors: null,
+         }
+      }
       default:
       {
          return {

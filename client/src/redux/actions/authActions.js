@@ -76,3 +76,11 @@ export const logout = () => async (dispatch: Dispatch) =>
       payload: null
    })
 }
+
+export const clearAuthErrors = () => async (dispatch: Dispatch) =>
+{
+   dispatch({
+      type: 'CLEAR_ERRORS',
+      payload: null
+   })
+}
