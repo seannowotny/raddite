@@ -10,7 +10,7 @@ function Post({ boardState: { selectedBoard, selectedPost }, authState: { authen
 {
    return (
       <Fragment>
-         <div className="card card-body mb-4">
+         <div className="card card-body my-4">
          {selectedPost 
          ?  <Fragment>
             <h1 className="card-title display-5 text-center text-info">{selectedPost.title}</h1>

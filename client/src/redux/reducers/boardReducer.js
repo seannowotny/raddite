@@ -12,7 +12,7 @@ const initialState = {
    selectedBoard: null,
    selectedPost: null,
    loading: false,
-   error: null,
+   boardErrors: null,
 };
 
 export default (state: any = initialState, action: Action) =>
@@ -84,7 +84,7 @@ export default (state: any = initialState, action: Action) =>
          {
             result = {
                ...state,
-               error: "SELECTED_BOARD HASN'T BEEN SET, ABORTING"
+               boardErrors: "SELECTED_BOARD HASN'T BEEN SET, ABORTING"
             };
          }
 

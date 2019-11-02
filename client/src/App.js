@@ -19,6 +19,7 @@ import { store, persistor } from './redux/store';
 import history from './helpers/history';
 
 import Navbar from './components/layout/Navbar';
+import Alerts from './components/Alerts';
 
 function App() 
 {
@@ -28,6 +29,7 @@ function App()
       <PersistGate loading={null} persistor={persistor}>
         <Navbar />
         <div className="container">
+        <Alerts />
           <Switch>
             <Route exact path='/' component={Home} />
 

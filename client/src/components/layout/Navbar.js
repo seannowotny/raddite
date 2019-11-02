@@ -14,7 +14,7 @@ function Navbar({ boardState: { selectedBoard },authState: { authenticatedAs }, 
    const [input, setInput] = useState('');
 
    return (
-      <nav role="navigation" className="navbar navbar-default navbar-fixed-top navbar-light bg-light mb-4">
+      <nav role="navigation" className="navbar navbar-default navbar-fixed-top navbar-light bg-light">
          <div className="container">
             <div className="pull-left">         
                   <BoardsListing input={input} setInput={setInput}/>      

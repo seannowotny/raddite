@@ -10,7 +10,7 @@ type Action = {
 const initialState = {
    authenticatedAs: null,
    token: null,
-   error: null
+   authErrors: null
 };
 
 export default (state: any = initialState, action: Action) =>
@@ -23,7 +23,7 @@ export default (state: any = initialState, action: Action) =>
          {
             return { 
                ...action.payload.authState,
-               error: state.error
+               authErrors: state.authErrors
             }
          }
          else
@@ -61,7 +61,7 @@ export default (state: any = initialState, action: Action) =>
       {
          return {
             ...state,
-            error: action.payload.errors
+            authErrors: action.payload.errors
          };
       }
       default:

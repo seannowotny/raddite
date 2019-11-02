@@ -9,7 +9,7 @@ const Board = ({ authState: { authenticatedAs }, boardState: { selectedBoard } }
 {
    return (
       <Fragment>
-         <h1 className="display-5 text-center mb-4">{selectedBoard && selectedBoard.name}</h1>
+         <h1 className="display-5 text-center my-4">{selectedBoard && selectedBoard.name}</h1>
          {authenticatedAs && 
             <AddPostLink />
          }
