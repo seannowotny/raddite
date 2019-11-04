@@ -1,6 +1,8 @@
 {
     "private": true,
-    "eslintIgnore": ["client/src/bootstrap/*"],
+    "eslintIgnore": [
+        "client/src/bootstrap/*"
+    ],
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -30,6 +32,8 @@
     },
     "dependencies": {
         "eslint": "^6.5.1",
-        "react-logger": "^1.1.0"
+        "react-logger": "^1.1.0",
+        "webpack": "4.41.0",
+        "webpack-dev-server": "3.2.1"
     }
 }
