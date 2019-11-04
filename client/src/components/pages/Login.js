@@ -36,7 +36,6 @@ function Login({ authState: { authenticatedAs }, login }): React.Node
                name="email"
                required
                autoFocus
-               email
                placeholder="Enter your email..."
                />
             </div>

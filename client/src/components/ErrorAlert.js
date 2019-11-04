@@ -2,9 +2,9 @@ import React from 'react'
 
 const ErrorAlert = ({ error, callback }) => {
    return (
-      <div id="alert" class="alert alert-danger alert-dismissible mt-4 mb-0 fade show" onMouseDown={(e) => { e.preventDefault(); callback(); }} role="alert">             
+      <div id="alert" className="alert alert-danger alert-dismissible mt-4 mb-0 fade show" onMouseDown={(e) => { e.preventDefault(); callback(); }} role="alert">             
          {error}
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
          </button>
       </div>
