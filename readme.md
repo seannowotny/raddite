@@ -1,5 +1,7 @@
 # What this repo is about
-This is a website inspired by a famous forum. So far functionality entails registering, loggin in, creating boards, posts and comments.
+This is a website inspired by a famous forum. Front end is React and backend is a Laravel API.
+So far functionality entails registering, loggin in, creating boards, posts and comments.
+You can take a look at a live version of this project at https://raddite.herokuapp.com/
 
 # How to clone and repreduce this repo with XAMPP
 Open c:/xampp/apache/conf/extra/vhosts.conf and add the following rule
