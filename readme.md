@@ -1,9 +1,8 @@
 # What this repo is about
-##### This is a website inspired by a famous forum. It hasn't been uploaded for viewing yet because of deployment difficulties but you can repreduce this project locally.
+This is a website inspired by a famous forum. So far functionality entails registering, loggin in, creating boards, posts and comments.
 
 # How to clone and repreduce this repo with XAMPP
-
-#####  Open c:/xampp/apache/conf/extra/vhosts.conf and add the following rule
+Open c:/xampp/apache/conf/extra/vhosts.conf and add the following rule
 
 ```
 <VirtualHost localhost:80>
@@ -16,8 +15,8 @@
 </VirtualHost>
 ```
 
-#####  In your browser enter localhost/phpadmin in the url bar and create a db called raddite with utf8mb4_unicode_ci
-#####  Open a command line interface of your choice and type the following
+In your browser enter localhost/phpadmin in the url bar and create a db called raddite with utf8mb4_unicode_ci
+Open a command line interface of your choice and type the following
 
 ```
 cd c:/xampp/htdocs
@@ -25,7 +24,7 @@ git clone https://github.com/seannowotny/raddite.git
 cd raddite
 ```
 
-#####  Create a .env file and enter the following
+Create a .env file and enter the following
 
 ```
 APP_NAME=Laravel
@@ -44,7 +43,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-#####  Back to the command line interface
+Back to the command line interface
 
 ```
 php artisan key:generate
@@ -60,14 +59,14 @@ cd ../
 php artisan migrate
 ```
 
-##### Optional:
+Optional:
 
 ```
 php artisan db:seed --no-interaction
 ```
 
-#####  To open the react application, open your browser and enter localhost:3000 into the url bar 
-##### and enter the following into your command line interface
+To open the react application, open your browser and enter localhost:3000 into the url bar 
+and enter the following into your command line interface
 
 ```
 cd client
