@@ -26,10 +26,11 @@ function App()
   return (
   <Router history={history}>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor} >
+        {/*$FlowFixMe*/}
         <Navbar />
         <div className="container">
-        <Alerts />
+          <Alerts />
           <Switch>
             <Route exact path='/' component={Home} />
 

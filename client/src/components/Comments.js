@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
 
-function Comments({ boardState: { selectedPost } }): React.Node
+const Comments = ({ boardState: { selectedPost } }): React.Node =>
 { 
    return (
       <Fragment>

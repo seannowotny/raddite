@@ -3,7 +3,7 @@
 import axios from 'axios';
 import history from '../../helpers/history';
 
-export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'ADD_POST' | 'ADD_COMMENT' | 'SET_LOADING';
+export type BoardAction = 'GET_BOARDS' | 'ADD_BOARD' | 'SET_SELECTED_BOARD' | 'SET_SELECTED_POST' | 'BOARDS_ERROR' | 'GET_POSTS' | 'ADD_POST' | 'ADD_COMMENT' | 'SET_LOADING' | 'CLEAR_ERRORS';
 
 type Dispatch = ({
    type: BoardAction,
@@ -163,7 +163,7 @@ export const addPost = (post: any, token: string, selectedBoardId: number, selec
    }
 };
 
-export const addComment = (comment: any, token: String, selectedPostId: number) => async (dispatch: Dispatch) =>
+export const addComment = (comment: any, token: string, selectedPostId: number) => async (dispatch: Dispatch) =>
 {
    // try
    // {

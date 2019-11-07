@@ -2,14 +2,14 @@
 
 import axios from "axios";
 
-export type AuthAction = 'LOGIN' | 'LOGOUT' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'SET_STATE';
+export type AuthAction = 'LOGIN' | 'LOGOUT' | 'REGISTER' | 'GET_CURRENT_USER' | 'AUTH_ERROR' | 'SET_STATE' | 'CLEAR_ERRORS';
 
 type Dispatch = ({
    type: AuthAction,
    payload: any
 }) => void;
 
-export const setError = (error) => async (dispatch: Dispatch) =>
+export const setError = (error: string) => async (dispatch: Dispatch) =>
 {
    dispatch({
       type: 'AUTH_ERROR',

@@ -1,11 +1,11 @@
 // @flow
 
-export type RedirectAction = 'SET_REDIRECT' | 'SET_ADDITIVE_REDIRECT' | 'REDIRECT_ERROR' | 'GET_PERSISTED_HISTORY_STATE';
+export type RedirectAction = 'SET_REDIRECT' | 'SET_ADDITIVE_REDIRECT' | 'REDIRECT_ERROR' | 'GET_PERSISTED_HISTORY_STATE' | 'GO_BACK' | 'GET_PERSISTED_REDIRECT_STATE';
 
-type Dispatch = {
+type Dispatch = ({
    type: RedirectAction,
    payload: any
-}
+}) => void;
 
 export const setLoading = () =>
 {

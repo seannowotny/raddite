@@ -1,10 +1,11 @@
 // @flow
 
-import React, { Fragment, useEffect } from 'react';
+import * as React from 'react';
+import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import history from '../../helpers/history';
 
-const AuthRouter = ({ authState: { authenticatedAs }, children }) =>
+const AuthRouter = ({ authState: { authenticatedAs }, children }): React.Node =>
 {
    useEffect(() => 
    {

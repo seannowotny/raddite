@@ -1,6 +1,7 @@
-import React from 'react'
+import * as React from 'react';
 
-const ErrorAlert = ({ error, callback }) => {
+const ErrorAlert = ({ error, callback }): React.Node =>
+{
    return (
       <div id="alert" className="alert alert-danger alert-dismissible mt-4 mb-0 fade show" onMouseDown={(e) => { e.preventDefault(); callback(); }} role="alert">             
          {error}

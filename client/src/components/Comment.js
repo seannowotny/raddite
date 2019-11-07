@@ -4,7 +4,24 @@ import * as React from 'react';
 import { Fragment } from 'react';
 import CommentField from './CommentField';
 
-function Comment({ id, comment }): React.Node
+import type { UserType } from './User';
+
+export type CommentType = {
+   id: number,
+   replyingTo: UserType,
+   content: string,
+   user: {
+      name: string
+   },
+   comments: CommentType[]
+};
+
+type CommentProps = {
+   id: number, 
+   comment: CommentType
+};
+
+const Comment = ({ id, comment }: CommentProps): React.Node =>
 { 
    return (
       <Fragment>

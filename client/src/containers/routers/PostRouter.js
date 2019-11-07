@@ -1,13 +1,14 @@
 // @flow
 
-import React, { Fragment, useEffect, useState } from 'react';
+import * as React from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setSelectedPost } from '../../redux/actions/boardActions';
 import { setRedirect } from '../../redux/actions/historyActions';
 import history from '../../helpers/history';
 
-const PostRouter = ({ boardState: { boards, selectedBoard, loading }, setSelectedPost, setRedirect, children }) =>
+const PostRouter = ({ boardState: { boards, selectedBoard, loading }, setSelectedPost, setRedirect, children }): React.Node =>
 {
    const { postTitle } = useParams();
 

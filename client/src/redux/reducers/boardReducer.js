@@ -4,7 +4,7 @@ import type { BoardAction } from '../actions/boardActions';
 
 type Action = {
    payload: any,
-   type: BoardAction
+   type: BoardAction | 'persist/REHYDRATE'
 };
 
 const initialState = {
@@ -125,8 +125,8 @@ export default (state: any = initialState, action: Action) =>
          if(commentToBeAdded.commentId)
          {
             let commentBeingRepliedTo = customFilter(selectedPost, commentToBeAdded.commentId);
-            // console.log(commentBeingRepliedTo);
-            commentBeingRepliedTo.comments.push(commentToBeAdded);
+            
+            commentBeingRepliedTo && commentBeingRepliedTo.comments.push(commentToBeAdded);
          }
          else
          {

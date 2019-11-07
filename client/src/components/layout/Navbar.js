@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { logout } from '../../redux/actions/authActions';
 import AddBoardButton from '../buttonsAndLinks/AddBoardButton';
 
-function Navbar({ boardState: { selectedBoard },authState: { authenticatedAs }, logout, location: { pathname } })
+const Navbar = ({ boardState: { selectedBoard },authState: { authenticatedAs }, logout, location: { pathname } }): React.Node => 
 {
    const [input, setInput] = useState('');
 

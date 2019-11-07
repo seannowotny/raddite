@@ -5,7 +5,7 @@ import { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addComment } from '../redux/actions/boardActions';
 
-function CommentField({ addComment, boardState: { selectedPost }, authState: { token }, commentId }): React.Node
+const CommentField = ({ addComment, boardState: { selectedPost }, authState: { token }, commentId }): React.Node =>
 {
    const [isSelected, setIsSelected] = useState(false);
 

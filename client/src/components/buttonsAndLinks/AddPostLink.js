@@ -4,7 +4,7 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function AddBoardButton ({ boardState: { selectedBoard }}): React.Node
+const AddBoardButton = ({ boardState: { selectedBoard }}): React.Node =>
 {
    return (
       <>

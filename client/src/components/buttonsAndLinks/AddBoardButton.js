@@ -7,7 +7,7 @@ import { addBoard, setSelectedBoard } from '../../redux/actions/boardActions';
 import { withRouter } from 'react-router';
 import '../../App.css';
 
-function AddBoardButton ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input, history, location }): React.Node
+const AddBoardButton = ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input, history, location }): React.Node =>
 {
    const handleClick = async e =>
    {

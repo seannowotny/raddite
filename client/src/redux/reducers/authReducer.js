@@ -3,7 +3,7 @@
 import type { AuthAction } from '../actions/authActions';
 
 type Action = {
-   type: AuthAction,
+   type: AuthAction | 'persist/REHYDRATE',
    payload: any
 };
 

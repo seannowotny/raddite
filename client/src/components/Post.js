@@ -1,18 +1,24 @@
 // @flow
 
-import React, { Fragment, useEffect, useState } from 'react';
+import * as React from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { setSelectedBoard, setSelectedPost } from '../redux/actions/boardActions';
 import { setRedirect } from '../redux/actions/historyActions';
 import history from '../helpers/history';
 
-function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
+export type PostType = ?{
+   title: string,
+   body: string
+};
+
+const Post = ({ boardState: { selectedBoard }, setSelectedPost, postId }): React.Node =>
 {
-   let [post, setPost] = useState(null);
+   let [post, setPost]: [PostType, any] = useState(null);
 
    const redirect = () =>
    {
-      history.push(`/${selectedBoard.name}/${post.title}`);
+      history.push(`/${selectedBoard.name}/${post && post.title ? post.title : ''}`);
    }
 
    useEffect(() => 
@@ -29,7 +35,7 @@ function Post({ boardState: { selectedBoard }, setSelectedPost, postId })
          ?  <Fragment>
                <div className="card card-body mb-5">
                   <button className="btn btn-link mb-2 card-title" onClick={redirect}><h3>{post.title}</h3></button>
-                  <p className="card-text">{post.body}</p>
+                  <p className="card-text">{post && post.body ? post.body : ''}</p>
                </div>
             </Fragment>
          :  <h1>Loading Post...</h1>}
