@@ -23,7 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:unit": "react-scripts test",
+    "test:e2e": "mocha --watch",
     "eject": "react-scripts eject",
     "dev": "npm start",
     "flow": "flow"
@@ -49,7 +50,9 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "flow-bin": "^0.109.0",
-    "react-test-renderer": "^16.12.0"
+    "mocha": "^6.2.2",
+    "react-test-renderer": "^16.12.0",
+    "selenium-webdriver": "^4.0.0-alpha.5"
   },
   "proxy": "http://localhost:80"
 }
