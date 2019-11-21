@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { Fragment } from 'react';
-import CommentField from './CommentField';
+import CommentField from '../CommentField/CommentField';
 
-import type { UserType } from './User';
+import type { UserType } from '../User/User';
 
 export type CommentType = {
    id: number,

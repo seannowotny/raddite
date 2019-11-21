@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setSelectedBoard, getBoards } from '../redux/actions/boardActions';
-import { setRedirect } from '../redux/actions/historyActions';
-import history from '../helpers/history';
+import { setSelectedBoard, getBoards } from '../../redux/actions/boardActions';
+import { setRedirect } from '../../redux/actions/historyActions';
+import history from '../../helpers/history';
 import './BoardsListing.css';
 
 const BoardsListing = ({ boardState: { boards }, setSelectedBoard, getBoards, setRedirect, input, setInput }): React.Node => 

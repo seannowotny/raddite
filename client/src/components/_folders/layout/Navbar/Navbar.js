@@ -3,11 +3,11 @@
 import * as React from 'react';
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BoardsListing from '../BoardsListing';
+import BoardsListing from '../../../BoardsListing/BoardsListing';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { logout } from '../../redux/actions/authActions';
-import AddBoardButton from '../buttonsAndLinks/AddBoardButton';
+import { logout } from '../../../../redux/actions/authActions';
+import AddBoardButton from '../../buttonsAndLinks/AddBoardButton/AddBoardButton';
 
 const Navbar = ({ boardState: { selectedBoard },authState: { authenticatedAs }, logout, location: { pathname } }): React.Node => 
 {

@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { setSelectedBoard, setSelectedPost } from '../redux/actions/boardActions';
-import { setRedirect } from '../redux/actions/historyActions';
-import history from '../helpers/history';
+import { setSelectedBoard, setSelectedPost } from '../../redux/actions/boardActions';
+import { setRedirect } from '../../redux/actions/historyActions';
+import history from '../../helpers/history';
 
 export type PostType = ?{
    title: string,

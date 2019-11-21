@@ -2,10 +2,10 @@
 
 import * as React from 'react'
 import { connect } from 'react-redux';
-import { addBoard, setSelectedBoard } from '../../redux/actions/boardActions';
+import { addBoard, setSelectedBoard } from '../../../../redux/actions/boardActions';
 // import history from '../../helpers/history';
 import { withRouter } from 'react-router';
-import '../../App.css';
+// import '../../App/App.css';
 
 const AddBoardButton = ({ authState: { authenticatedAs, token }, boardState: { boards }, addBoard, setSelectedBoard, input, history, location }): React.Node =>
 {

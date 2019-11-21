@@ -1,9 +1,9 @@
 // @flow
 
 import React, { Fragment } from 'react';
-import Post from '../Post';
+import Post from '../Post/Post';
 import { connect } from 'react-redux';
-import AddPostLink from '../buttonsAndLinks/AddPostLink';
+import AddPostLink from '../../buttonsAndLinks/AddBoardButton/AddBoardButton';
 
 const Board = ({ authState: { authenticatedAs }, boardState: { selectedBoard } }) =>
 {

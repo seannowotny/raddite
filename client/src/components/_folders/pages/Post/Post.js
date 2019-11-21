@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
-import Comments from '../Comments/Comments';
-import CommentField from '../CommentField/CommentField';
+import CommentField from '../../../CommentField/CommentField';
+import Comments from '../../../Comments/Comments';
 
 function Post({ boardState: { selectedBoard, selectedPost }, authState: { authenticatedAs }}): React.Node
 {

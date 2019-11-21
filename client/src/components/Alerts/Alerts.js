@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import ErrorAlert from './ErrorAlert';
-import { clearAuthErrors } from '../redux/actions/authActions';
-import { clearBoardErrors } from '../redux/actions/boardActions';
+import ErrorAlert from '../ErrorAlert/ErrorAlert';
+import { clearAuthErrors } from '../../redux/actions/authActions';
+import { clearBoardErrors } from '../../redux/actions/boardActions';
 
 const Alerts = ({ authState: { authErrors }, boardState: { boardErrors }}): React.Node => 
 {

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { addComment } from '../redux/actions/boardActions';
+import { addComment } from '../../redux/actions/boardActions';
 
 const CommentField = ({ addComment, boardState: { selectedPost }, authState: { token }, commentId }): React.Node =>
 {

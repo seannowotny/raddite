@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../../redux/actions/authActions';
-import history from '../../helpers/history';
+import history from '../../../../helpers/history';
+import { login } from '../../../../redux/actions/authActions';
 
 function Login({ authState: { authenticatedAs }, login }): React.Node 
 { 

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../../redux/actions/boardActions';
+import { addPost } from '../../../../redux/actions/boardActions';
 
 function AddPost({ boardState: { selectedBoard }, addPost, authState: { token } }): React.Node
 {
