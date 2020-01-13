@@ -17,7 +17,7 @@ Open c:/xampp/apache/conf/extra/vhosts.conf and add the following rule
 </VirtualHost>
 ```
 
-In your browser enter localhost/phpadmin in the url bar and create a db called raddite with utf8mb4_unicode_ci
+In your browser enter localhost/phpmyadmin in the url bar and create a db called raddite with utf8mb4_unicode_ci
 Open a command line interface of your choice and type the following
 
 ```
