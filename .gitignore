@@ -12,6 +12,8 @@ npm-debug.log
 yarn-error.log
 
 /storage
-/.vscode
 .rnd
 package-lock.json
+
+public/css
+public/js
